@@ -1,0 +1,14 @@
+{
+    "taikhoan":[
+        {
+            "email": "admin@gmail.com",
+            "password": "admin",
+            "permission": 0
+        },
+        {
+            "email": "user@gmail.com",
+            "password": "user",
+            "permission": 1
+        }
+    ]
+}

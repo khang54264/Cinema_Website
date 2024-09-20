@@ -1,0 +1,52 @@
+{
+    "suatchieuphim":[
+        {
+            "masuatchieu": "SC01",
+            "tenphim": "ĐẤT RỪNG PHƯƠNG NAM",
+            "maphongchieu": "PC01",
+            "ngaychieu": "10/11/2023",
+            "giochieu": "14h00",
+            "loaichieu": "2D - Phụ Đề"
+        },
+        {
+            "masuatchieu": "SC02",
+            "tenphim": "QUỶ ÁM: TÍN ĐỒ",
+            "maphongchieu": "PC02",
+            "ngaychieu": "11/11/2023",
+            "giochieu": "15h00",
+            "loaichieu": "2D - Thuyết Minh"
+        },
+        {
+            "masuatchieu": "SC03",
+            "tenphim": "CÚ MÁY ĂN TIỀN",
+            "maphongchieu": "PC06",
+            "ngaychieu": "12/11/2023",
+            "giochieu": "09h00",
+            "loaichieu": "2D - Phụ Đề"
+        },
+        {
+            "masuatchieu": "SC04",
+            "tenphim": "GIA ĐÌNH QUÁI VẬT",
+            "maphongchieu": "PC08",
+            "ngaychieu": "12/11/2023",
+            "giochieu": "15h00",
+            "loaichieu": "2D - Phụ Đề"
+        },
+        {
+            "masuatchieu": "SC05",
+            "tenphim": "GIAO LỘ 8675",
+            "maphongchieu": "PC04",
+            "ngaychieu": "12/11/2023",
+            "giochieu": "16h00",
+            "loaichieu": "2D - Phụ Đề"
+        },
+        {
+            "masuatchieu": "SC06",
+            "tenphim": "NĂM ĐÊM KINH HOÀNG",
+            "maphongchieu": "PC09",
+            "ngaychieu": "13/11/2023",
+            "giochieu": "10h00",
+            "loaichieu": "2D - Phụ Đề"
+        }
+    ]
+}

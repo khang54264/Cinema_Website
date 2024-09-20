@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <title>Galaxy Cinema | Rạp chiếu phim hay nhất Việt Nam 2023</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script type="text/Javascript" src="JS/jquery-3.6.0.min.js" defer></script>
+        <script src="JS/home.js" defer></script>
+        <link rel="stylesheet" type="text/css" href="CSS/dsuudai.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    </head>
+    <body>
+        <!-- Header -->
+        <div class="header">
+            <div class="header-icon">
+                <a href="home.html"><img src="Images/galaxy-logo.png" class="icon"></a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm tên phim, diễn viên...">
+                <button type="submit" class="search-btn"><img src="Images/magnifying-glass-solid.svg"></button>
+            </div>
+            <div class="login">
+                <a onclick="document.getElementById('id01').style.display='block'" style="width:auto;" id="user"><img src="Images/user-solid.svg">  Đăng nhập</a>
+            </div>
+            <div id="id01" class="modal">
+                <form class="modal-content animate" id="loginForm">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        <img src="Images/login-img.svg" alt="Avatar" class="avatar">
+                    </div>
+                    <div class="login-form">
+                        <label for="email"><b>Email</b></label>
+                        <input id="email" type="text" placeholder="Nhập Email" required >
+                        <label for="psw"><b>Mật Khẩu</b></label>
+                        <input id = "myPass" type="password" placeholder="Nhập Mật Khẩu" required>
+                        <label>
+                            <input type="checkbox" onclick="showPass()">Hiển thị mật khẩu
+                        </label>
+                        <button class="login-btn" type="submit" onclick="login()">ĐĂNG NHẬP</button>
+                        <a href="#" class="psw">Quên mật khẩu?</a>
+                        <div class="login-border"></div>
+                    </div>            
+                    <div class="register-form" style="background-color:#f1f1f1">
+                        <label>Bạn chưa có tài khoản?</label>
+                        <button type="button" onclick="document.getElementById('id01').style.display='none';
+                                                       document.getElementById('id02').style.display='block'" class="register-btn">ĐĂNG KÝ</button>
+                        
+                    </div>
+                </form>
+            </div>
+            <div id="id02" class="modal">
+                <form class="modal-content animate" id="registerForm">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        <img src="Images/login-img.svg" alt="Avatar" class="avatar">
+                    </div>
+                    <div class="login-form">
+                        <label for="name"><b>Họ và tên</b></label>
+                        <input type="text" placeholder="Nhập Họ và tên" required>
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" placeholder="Nhập Email" required>
+                        <label for="number"><b>Số điện thoại</b></label>
+                        <input type="text" placeholder="Nhập Số điện thoại" required>
+                        <label for="gender"><b>Giới tính</b></label>
+                        <label class="radio-btns"> Nam
+                            <input type="radio" name="radio">
+                            <span class="checkmark"></span>
+                        </label> 
+                        <label class="radio-btns"> Nữ
+                            <input type="radio" name="radio">
+                            <span class="checkmark"></span>              
+                        </label>
+                        <label for="psw"><b>Mật Khẩu</b></label>
+                        <input id="myRPass1" type="password" placeholder="Nhập Mật Khẩu" required>
+                        <label for="psw"><b>Nhập lại mật Khẩu</b></label>
+                        <input id="myRPass2" type="password" placeholder="Nhập lại Mật Khẩu" required>
+                        <label>
+                            <input type="checkbox" onclick="showRegisterPass() ">Hiển thị mật khẩu
+                        </label>
+                        <button class="login-btn" type="submit">HOÀN THÀNH</button>
+                        <div class="login-border"></div>
+                    </div>            
+                    </div>
+                </form>
+            </div>           
+        </div>
+        <!-- Menu -->
+        <div class="menu">
+            <div class="nav-ctl">
+                <nav>
+                    <ul class="primary-nav">
+                        <li><a href="muave.html">MUA VÉ</a></li>
+                        <li>
+                            <div class="dropdown">
+                                <a href="">PHIM</a>
+                            </div>
+                            <div class="dropdown-content">
+                                <div class="drp-header">
+                                    <div class="drp-main">
+                                        <h4>PHIM ĐANG CHIẾU</h4>
+                                    </div>
+                                    <div class="drp-row">
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/datrungphuongnam.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="phim1.html">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">ĐẤT RỪNG PHƯƠNG NAM</h4>
+                                                <h4 class="title-sub"></h4>
+                                            </div>    
+                                        </div>
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/quyam.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">THE EXORCIST: BELIEVER</h4>
+                                                <h4 class="title-sub">QUỶ ÁM: TÍN ĐỒ</h4>
+                                            </div>
+                                        </div>
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/cobweb.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">COBWEB</h4>
+                                                <h4 class="title-sub">CÚ MÁY ĂN TIỀN</h4>
+                                            </div>
+                                        </div>
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/wonka.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="phim2.html">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">WONKA</h4>
+                                                <h4 class="title-sub"></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="drp-main" style="top: 0;">
+                                        <h4>PHIM SẮP CHIẾU</h4>
+                                    </div>
+                                    <div class="drp-row">
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/monsterfamily.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">GIA ĐÌNH QUÁI VẬT</h4>
+                                                <h4 class="title-sub"></h4>
+                                            </div>    
+                                        </div>
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/flowermoon.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">KILLERS OF THE FLOWER MOON</h4>
+                                                <h4 class="title-sub">VẦNG TRĂNG MÁU</h4>
+                                            </div>
+                                        </div>
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/tasteofhorror.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">TASTES OF HORROR</h4>
+                                                <h4 class="title-sub">ÂM HỒN ĐÔ THỊ</h4>
+                                            </div>
+                                        </div>
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/fnaf.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">FIVE NIGHTS AT FREDDY'S</h4>
+                                                <h4 class="title-sub">NĂM ĐÊM KINH HOÀNG</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown">
+                                <a href="">GÓC ĐIỆN ẢNH</a>
+                            </div>
+                            <div class="dropdown-cont">
+                                <div class="drp-row">
+                                    <div class="drp-menu">
+                                        <a>THỂ LOẠI PHIM</a>
+                                        <a>DIỄN VIÊN</a>
+                                        <a>ĐẠO DIỄN</a>
+                                        <!-- <a>BÌNH LUẬN PHIM</a>
+                                        <a>BLOG ĐIỆN ẢNH</a> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown">
+                                <a href="">SỰ KIỆN</a>
+                            </div>
+                            <div class="dropdown-cont">
+                                <div class="drp-row">
+                                    <div class="drp-menu">
+                                        <a href="dsuudai.html">ƯU ĐÃI</a>
+                                        <a>PHIM HAY THÁNG</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="">RẠP/GIÁ VÉ</a></li>
+                        <li><a href="">HỖ TRỢ</a></li>
+                        <li><a href="">THÀNH VIÊN</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!--Nội dung trang-->
+        <div class="page-content">
+            <div class="sale-content">
+                <!--Danh sách ưu đãi-->
+                <div class="tab" style="margin-left: 0px; margin-right: 0px; border-bottom: 0px;">
+                    <span class="border"></span>
+                    <div class="tab-header">Ưu đãi</div>
+                </div>
+                <div class="sale-group">
+                    <div class="sale-item">
+                        <div class="sale-container">
+                            <img src="Images/promotion/galaxysala.png" class="sale-image">
+                            <div class="sale-overlay">
+                                <div class="sale-text">Trải Nghiệm Galaxy Sala Chỉ 9K</div>
+                            </div>
+                            </div>
+                    </div>
+                    <div class="sale-item">
+                        <div class="sale-container">
+                            <img src="Images/promotion/filldayly.png" class="sale-image">
+                            <div class="sale-overlay">
+                                <div class="sale-text">Fill Đầy Ly - Tình Đầy Tim - Năm Mới Đầy Năng Lượng</div>
+                            </div>
+                            </div>
+                    </div>
+                    <div class="sale-item">
+                        <div class="sale-container">
+                            <img src="Images/promotion/motheflex.png" class="sale-image">
+                            <div class="sale-overlay">
+                                <div class="sale-text">Galaxy x OCB Tặng Ngay 100K Cho Khách Hàng Mở Thẻ</div>
+                            </div>
+                            </div>
+                    </div>  
+                    <div class="clearfix"></div>
+                    <div class="sale-item">
+                        <div class="sale-container">
+                            <img src="Images/promotion/u22vuive.png" class="sale-image">
+                            <div class="sale-overlay">
+                                <div class="sale-text">U22 Vui Vẻ - Bắp Nước Siêu Hạt Dẻ</div>
+                            </div>
+                            </div>
+                    </div>
+                    <div class="sale-item">
+                        <div class="sale-container">
+                            <img src="Images/promotion/nganphimtainha.png" class="sale-image">
+                            <div class="sale-overlay">
+                                <div class="sale-text">Một Phim Tại Rạp - Ngàn Phim Tại Nhà</div>
+                            </div>
+                            </div>
+                    </div>
+                    <div class="sale-item">
+                        <div class="sale-container">
+                            <img src="Images/promotion/ngaytrian.png" class="sale-image">
+                            <div class="sale-overlay">
+                                <div class="sale-text">Ngày Tri Ân Của Galaxy Cinema - Ngày Thứ Hai ĐẦU TIÊN Mỗi Tháng</div>
+                            </div>
+                            </div>
+                    </div>  
+                </div>
+            </div>
+            <!--Phim đang chiếu-->
+            <div class="film-onair">
+                <div class="tab" style="margin-left: 0px; margin-right: 0px; border-bottom: 0px;">
+                    <span class="border"></span>
+                    <div class="tab-header">Phim đang chiếu</div>
+                </div>
+                <div class="movie-item">
+                    <div class="movie-article">
+                        <div style="background-color: #000000; margin-bottom: 15px;">
+                            <a><img class="movie-image" src="Images/films/quyam.jpg"></a>
+                        </div>
+                        <div class="movie-ticket-buy">
+                            <a href="">
+                                <button class="ticket-btn">
+                                    <img src="Images/ticket-light.svg">
+                                    <span> Mua vé</span>
+                                </button>
+                            </a> 
+                        </div>
+                        <div>THE EXORCIST: BELIEVER</div>
+                        <div class="title-sub">QUỶ ÁM: TÍN ĐỒ</div>
+                    </div>
+                </div>
+                <div class="movie-item">
+                    <div class="movie-article">
+                        <div style="background-color: #000000; margin-bottom: 15px;">
+                            <a><img class="movie-image" src="Images/films/giaolo8675.jpg"></a>
+                        </div>
+                        <div class="movie-ticket-buy">
+                            <a href="">
+                                <button class="ticket-btn">
+                                    <img src="Images/ticket-light.svg">
+                                    <span> Mua vé</span>
+                                </button>
+                            </a> 
+                        </div>
+                        <div>GIAO LỘ 8675</div>
+                        <div class="title-sub"></div>
+                    </div>
+                </div>
+                <div class="movie-item">
+                    <div class="movie-article">
+                        <div style="background-color: #000000; margin-bottom: 15px;">
+                            <a><img class="movie-image" src="Images/films/cobweb.jpg"></a>
+                        </div>
+                        <div class="movie-ticket-buy">
+                            <a href="">
+                                <button class="ticket-btn">
+                                    <img src="Images/ticket-light.svg">
+                                    <span> Mua vé</span>
+                                </button>
+                            </a> 
+                        </div>
+                        <div class="title-main">COBWEB</div>
+                        <div class="title-sub">CÚ MÁY ĂN TIỀN</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-container">
+                <div class="footer-top">
+                    <div style="width: 25%;">
+                        <h3 class="footer-title">GIỚI THIỆU</h3>
+                        <ul>
+                            <li><a>Về Chúng Tôi</a></li>
+                            <li><a>Thỏa Thuận Sử Dụng</a></li>
+                            <li><a>Quy Chế Hoạt Động</a></li>
+                            <li><a>Chính Sách Bảo Mật</a></li>
+                        </ul>
+                    </div>
+                    <div style="width: 25%;">
+                        <h3 class="footer-title">GÓC ĐIỆN ẢNH</h3>
+                        <ul>
+                            <li><a>Thể Loại Phim</a></li>
+                            <!-- <li><a>Bình Luận Phim</a></li>
+                            <li><a>Blog Điện Ảnh</a></li> -->
+                            <li><a>Phim Hay Tháng</a></li>
+                        </ul>
+                    </div>
+                    <div style="width: 25%;">
+                        <h3 class="footer-title">HỖ TRỢ</h3>
+                        <ul>
+                            <li><a>Góp Ý</a></li>
+                            <li><a>Sale & Services</a></li>
+                            <li><a>Rạp / Giá Vé</a></li>
+                            <li><a>Tuyển Dụng</a></li>
+                            <li><a>FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div style="width: 25%;">
+                        <div class="footer-logo">
+                            <img src="Images/footer/galaxycine_logo.svg">
+                        </div>
+                        <ul style="display: flex;">
+                            <li class="footer-connect"><a><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-facebook" class="svg-inline--fa fa-square-facebook fa-2x " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z"></path></svg></a></li>
+                            <li class="footer-connect"><a><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="youtube" class="svg-inline--fa fa-youtube fa-2x " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg></a></li>
+                            <li class="footer-connect"><a><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-instagram" class="svg-inline--fa fa-square-instagram fa-2x " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224,202.66A53.34,53.34,0,1,0,277.36,256,53.38,53.38,0,0,0,224,202.66Zm124.71-41a54,54,0,0,0-30.41-30.41c-21-8.29-71-6.43-94.3-6.43s-73.25-1.93-94.31,6.43a54,54,0,0,0-30.41,30.41c-8.28,21-6.43,71.05-6.43,94.33S91,329.26,99.32,350.33a54,54,0,0,0,30.41,30.41c21,8.29,71,6.43,94.31,6.43s73.24,1.93,94.3-6.43a54,54,0,0,0,30.41-30.41c8.35-21,6.43-71.05,6.43-94.33S357.1,182.74,348.75,161.67ZM224,338a82,82,0,1,1,82-82A81.9,81.9,0,0,1,224,338Zm85.38-148.3a19.14,19.14,0,1,1,19.13-19.14A19.1,19.1,0,0,1,309.42,189.74ZM400,32H48A48,48,0,0,0,0,80V432a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V80A48,48,0,0,0,400,32ZM382.88,322c-1.29,25.63-7.14,48.34-25.85,67s-41.4,24.63-67,25.85c-26.41,1.49-105.59,1.49-132,0-25.63-1.29-48.26-7.15-67-25.85s-24.63-41.42-25.85-67c-1.49-26.42-1.49-105.61,0-132,1.29-25.63,7.07-48.34,25.85-67s41.47-24.56,67-25.78c26.41-1.49,105.59-1.49,132,0,25.63,1.29,48.33,7.15,67,25.85s24.63,41.42,25.85,67.05C384.37,216.44,384.37,295.56,382.88,322Z"></path></svg></a></li>
+                        </ul>
+                        <div class="footer-logo">
+                            <a href="http://online.gov.vn/Home/WebDetails/5005?AspxAutoDetectCookieSupport=1"><img style="width: 168px;" src="Images/footer/logoSaleNoti.png"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="footer-logo">
+                        <img src="Images/footer/galaxycine_logo.svg">
+                    </div>
+                    <div class="footer-inf">
+                        <h3>CÔNG TY CỔ PHẦN PHIM THIÊN NGÂN</h3>
+                        <p>Toà nhà Bitexco Nam Long, 63A Võ Văn Tần, Phường 6, Quận 3, Tp. Hồ Chí Minh, Việt Nam</p>
+                        <p>028.39.333.303 - 19002224 (9:00 - 22:00) - hotro@galaxystudio.vn</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

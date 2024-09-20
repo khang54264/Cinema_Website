@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <title>Galaxy Cinema | Rạp chiếu phim hay nhất Việt Nam 2023</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script type="text/Javascript" src="JS/jquery-3.6.0.min.js" defer></script>
+        <script src="JS/home.js" defer></script>
+        <script src="JS/angular.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="CSS/home.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    </head>
+    <body ng-app="QLRCP">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-icon">
+                <a href="home.html"><img src="Images/galaxy-logo.png" class="icon"></a>
+            </div>
+            <div class="search-bar" ng-controller="TimKiemCtrl">
+                <div style="display:flex;">
+                    <input type="text" placeholder="Tìm tên phim..." ng-model="timtenphim" onchange="document.getElementById('search-result').style.display='none'">
+                <button type="submit" class="search-btn" onclick="document.getElementById('search-result').style.display='block'" ng-click="loadPhim()"><img src="Images/magnifying-glass-solid.svg"></button>
+                </div>    
+                <div id="search-result" class="search-result">
+                    <li href="" class="dongphim" ng-repeat="x in listPhim">{{x.tenPhim}}</li><br>
+                </div>
+            </div>
+            <div class="login">
+                <a onclick="document.getElementById('id01').style.display='block'" style="width:auto;" id="user"><img src="Images/user-solid.svg">  Đăng nhập</a>
+            </div>
+            <div id="id01" class="modal" ng-controller="LoginCtrl">
+                <form class="modal-content animate" id="loginForm">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        <img src="Images/login-img.svg" alt="Avatar" class="avatar">
+                    </div>
+                    <div class="login-form">
+                        <label for="email"><b>Tên đăng nhập</b></label>
+                        <input ng-model="username" id="email" type="text" placeholder="Nhập tên đăng nhập hoặc email" required>
+                        <label for="psw"><b>Mật Khẩu</b></label>
+                        <input ng-model="password" id = "myPass" type="password" placeholder="Nhập Mật Khẩu" required>
+                        <label>
+                            <input type="checkbox" onclick="showPass()">Hiển thị mật khẩu
+                        </label>
+                        <button class="login-btn" type="submit" ng-click="login()">ĐĂNG NHẬP</button>
+                        <a href="#" class="psw">Quên mật khẩu?</a>
+                        <div class="login-border"></div>
+                    </div>            
+                    <div class="register-form" style="background-color:#f1f1f1">
+                        <label>Bạn chưa có tài khoản?</label>
+                        <button type="button" onclick="document.getElementById('id01').style.display='none';
+                                                       document.getElementById('id02').style.display='block'" class="register-btn">ĐĂNG KÝ</button>
+                        
+                    </div>
+                </form>
+            </div>
+            <div id="id02" class="modal">
+                <form class="modal-content animate" id="registerForm">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        <img src="Images/login-img.svg" alt="Avatar" class="avatar">
+                    </div>
+                    <div class="login-form">
+                        <label for="name"><b>Họ và tên</b></label>
+                        <input type="text" placeholder="Nhập Họ và tên" required>
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" placeholder="Nhập Email" required>
+                        <label for="number"><b>Số điện thoại</b></label>
+                        <input type="text" placeholder="Nhập Số điện thoại" required>
+                        <label for="gender"><b>Giới tính</b></label>
+                        <label class="radio-btns"> Nam
+                            <input type="radio" name="radio">
+                            <span class="checkmark"></span>
+                        </label> 
+                        <label class="radio-btns"> Nữ
+                            <input type="radio" name="radio">
+                            <span class="checkmark"></span>              
+                        </label>
+                        <label for="psw"><b>Mật Khẩu</b></label>
+                        <input id="myRPass1" type="password" placeholder="Nhập Mật Khẩu" required>
+                        <label for="psw"><b>Nhập lại mật Khẩu</b></label>
+                        <input id="myRPass2" type="password" placeholder="Nhập lại Mật Khẩu" required>
+                        <label>
+                            <input type="checkbox" onclick="showRegisterPass() ">Hiển thị mật khẩu
+                        </label>
+                        <button class="login-btn" type="submit">HOÀN THÀNH</button>
+                        <div class="login-border"></div>
+                    </div>            
+                    </div>
+                </form>
+            </div>           
+        </div>
+        <!-- Menu -->
+        <div class="menu">
+            <div class="nav-ctl">
+                <nav>
+                    <ul class="primary-nav">
+                        <li><a href="muave.html">MUA VÉ</a></li>
+                        <li>
+                            <div class="dropdown">
+                                <a href="">PHIM</a>
+                            </div>
+                            <div class="dropdown-content">
+                                <div class="drp-header">
+                                    <div class="drp-main">
+                                        <h4>PHIM ĐANG CHIẾU</h4>
+                                    </div>
+                                    <div class="drp-row">
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/datrungphuongnam.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="phim1.html">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">ĐẤT RỪNG PHƯƠNG NAM</h4>
+                                                <h4 class="title-sub"></h4>
+                                            </div>    
+                                        </div>
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/quyam.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">THE EXORCIST: BELIEVER</h4>
+                                                <h4 class="title-sub">QUỶ ÁM: TÍN ĐỒ</h4>
+                                            </div>
+                                        </div>
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/cobweb.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">COBWEB</h4>
+                                                <h4 class="title-sub">CÚ MÁY ĂN TIỀN</h4>
+                                            </div>
+                                        </div>
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/wonka.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="phim2.html">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">WONKA</h4>
+                                                <h4 class="title-sub"></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="drp-main" style="top: 0;">
+                                        <h4>PHIM SẮP CHIẾU</h4>
+                                    </div>
+                                    <div class="drp-row">
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/monsterfamily.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">GIA ĐÌNH QUÁI VẬT</h4>
+                                                <h4 class="title-sub"></h4>
+                                            </div>    
+                                        </div>
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/flowermoon.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">KILLERS OF THE FLOWER MOON</h4>
+                                                <h4 class="title-sub">VẦNG TRĂNG MÁU</h4>
+                                            </div>
+                                        </div>
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/tasteofhorror.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">TASTES OF HORROR</h4>
+                                                <h4 class="title-sub">ÂM HỒN ĐÔ THỊ</h4>
+                                            </div>
+                                        </div>
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/fnaf.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">FIVE NIGHTS AT FREDDY'S</h4>
+                                                <h4 class="title-sub">NĂM ĐÊM KINH HOÀNG</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown">
+                                <a href="">GÓC ĐIỆN ẢNH</a>
+                            </div>
+                            <div class="dropdown-cont">
+                                <div class="drp-row">
+                                    <div class="drp-menu">
+                                        <a>THỂ LOẠI PHIM</a>
+                                        <a>DIỄN VIÊN</a>
+                                        <a>ĐẠO DIỄN</a>
+                                        <!-- <a>BÌNH LUẬN PHIM</a>
+                                        <a>BLOG ĐIỆN ẢNH</a> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown">
+                                <a href="">SỰ KIỆN</a>
+                            </div>
+                            <div class="dropdown-cont">
+                                <div class="drp-row">
+                                    <div class="drp-menu">
+                                        <a href="dsuudai.html">ƯU ĐÃI</a>
+                                        <a>PHIM HAY THÁNG</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="">RẠP/GIÁ VÉ</a></li>
+                        <li><a href="">HỖ TRỢ</a></li>
+                        <li><a href="">THÀNH VIÊN</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- Slideshow -->
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="Images/slideshow/slideshow1.jpg" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <img src="Images/slideshow/slideshow2.jpg" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <img src="Images/slideshow/slideshow3.jpg" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <img src="Images/slideshow/slideshow4.jpg" style="width:100%">
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            <div style="text-align:center; margin-top: -30px;">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
+        </div>
+        <br>
+        <!-- Tab chuyển đổi -->
+        <div class="tab">
+            <span class="border"></span>
+            <div class="tab-header">Phim</div>
+            <button class="tablinks" onclick="openTab(event, 'PHIMDANGCHIEU')">PHIM ĐANG CHIẾU</button>
+            <button class="tablinks" onclick="openTab(event, 'PHIMSAPCHIEU')">PHIM SẮP CHIẾU</button>
+        </div>
+        <!-- Phim đang chiếu -->
+        <div id="PHIMDANGCHIEU" class="tabcontent">
+            <div class="movie-group">
+                <div class="movie-item">
+                    <div class="movie-article">
+                        <div style="background-color: #000000; margin-bottom: 15px;">
+                            <a><img class="movie-image" src="Images/films/datrungphuongnam.jpg"></a>
+                        </div>
+                        <div class="movie-ticket-buy">
+                            <a href="phim1.html">Ka
+                                <button class="ticket-btn">
+                                    <img src="Images/ticket-light.svg">
+                                    <span> Mua vé</span>
+                                </button>
+                            </a> 
+                        </div>
+                        <div>ĐẤT RỪNG PHƯƠNG NAM</div>
+                        <div class="title-sub"></div>
+                    </div>
+                </div>
+                <div class="movie-item">
+                    <div class="movie-article">
+                        <div style="background-color: #000000; margin-bottom: 15px;">
+                            <a><img class="movie-image" src="Images/films/quyam.jpg"></a>
+                        </div>
+                        <div class="movie-ticket-buy">
+                            <a href="">
+                                <button class="ticket-btn">
+                                    <img src="Images/ticket-light.svg">
+                                    <span> Mua vé</span>
+                                </button>
+                            </a> 
+                        </div>
+                        <div>THE EXORCIST: BELIEVER</div>
+                        <div class="title-sub">QUỶ ÁM: TÍN ĐỒ</div>
+                    </div> 
+                </div>
+                <div class="movie-item">
+                    <div class="movie-article">
+                        <div style="background-color: #000000; margin-bottom: 15px;">
+                            <a><img class="movie-image" src="Images/films/wonka.jpg"></a>
+                        </div>
+                        <div class="movie-ticket-buy">
+                            <a href="phim2.html">
+                                <button class="ticket-btn">
+                                    <img src="Images/ticket-light.svg">
+                                    <span> Mua vé</span>
+                                </button>
+                            </a> 
+                        </div>
+                        <div>WONKA</div>
+                        <div class="title-sub"></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="movie-item">
+                    <div class="movie-article">
+                        <div style="background-color: #000000; margin-bottom: 15px;">
+                            <a><img class="movie-image" src="Images/films/cobweb.jpg"></a>
+                        </div>
+                        <div class="movie-ticket-buy">
+                            <a href="">
+                                <button class="ticket-btn">
+                                    <img src="Images/ticket-light.svg">
+                                    <span> Mua vé</span>
+                                </button>
+                            </a> 
+                        </div>
+                        <div class="title-main">COBWEB</div>
+                        <div class="title-sub">CÚ MÁY ĂN TIỀN</div>
+                    </div>
+                </div>
+                <div class="movie-item">
+                    <div class="movie-article">
+                        <div style="background-color: #000000; margin-bottom: 15px;">
+                            <a><img class="movie-image" src="Images/films/giaolo8675.jpg"></a>
+                        </div>
+                        <div class="movie-ticket-buy">
+                            <a href="">
+                                <button class="ticket-btn">
+                                    <img src="Images/ticket-light.svg">
+                                    <span> Mua vé</span>
+                                </button>
+                            </a> 
+                        </div>
+                        <div>GIAO LỘ 8675</div>
+                        <div class="title-sub"></div>
+                    </div>
+                </div>
+                <div class="movie-item">
+                    <div class="movie-article">
+                        <div style="background-color: #000000; margin-bottom: 15px;">
+                            <a><img class="movie-image" src="Images/films/centscoups.jpg"></a>
+                        </div>
+                        <div class="movie-ticket-buy">
+                            <a href="">
+                                <button class="ticket-btn">
+                                    <img src="Images/ticket-light.svg">
+                                    <span> Mua vé</span>
+                                </button>
+                            </a> 
+                        </div>
+                        <div>LES QUATRE CENTS COUPS</div>
+                        <div class="title-sub"></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <!-- <div class="movie-more">
+                <a>XEM THÊM ></a>
+            </div> -->
+        </div>
+        <!-- Phim sắp chiếu -->
+        <div id="PHIMSAPCHIEU" class="tabcontent">
+            <div class="movie-group">
+                <div class="movie-item">
+                    <div class="movie-article">
+                        <div style="background-color: #000000; margin-bottom: 15px;">
+                            <a><img class="movie-image" src="Images/films/flowermoon.jpg"></a>
+                        </div>
+                        <div class="movie-ticket-buy">
+                            <a href="">
+                                <button class="ticket-btn">
+                                    <img src="Images/ticket-light.svg">
+                                    <span> Mua vé</span>
+                                </button>
+                            </a> 
+                        </div>
+                        <div>KILLERS OF THE FLOWER MOON</div>
+                        <div class="title-sub">VẦNG TRĂNG MÁU</div>
+                    </div>
+                </div>
+                <div class="movie-item">
+                    <div class="movie-article">
+                        <div style="background-color: #000000; margin-bottom: 15px;">
+                            <a><img class="movie-image" src="Images/films/monsterfamily.jpg"></a>
+                        </div>
+                        <div class="movie-ticket-buy">
+                            <a href="">
+                                <button class="ticket-btn">
+                                    <img src="Images/ticket-light.svg">
+                                    <span> Mua vé</span>
+                                </button>
+                            </a> 
+                        </div>
+                        <div>MONSTER FAMILY</div>
+                        <div class="title-sub">GIA ĐÌNH QUÁI VẬT</div>
+                    </div>
+                </div>
+                <div class="movie-item">
+                    <div class="movie-article">
+                        <div style="background-color: #000000; margin-bottom: 15px;">
+                            <a><img class="movie-image" src="Images/films/fnaf.jpg"></a>
+                        </div>
+                        <div class="movie-ticket-buy">
+                            <a href="">
+                                <button class="ticket-btn">
+                                    <img src="Images/ticket-light.svg">
+                                    <span> Mua vé</span>
+                                </button>
+                            </a> 
+                        </div>
+                        <div>FIVE NIGHTS AT FREDDY'S</div>
+                        <div class="title-sub">NĂM ĐÊM KINH HOÀNG</div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="movie-item">
+                    <div class="movie-article">
+                        <div style="background-color: #000000; margin-bottom: 15px;">
+                            <a><img class="movie-image" src="Images/films/tasteofhorror.jpg"></a>
+                        </div>
+                        <div class="movie-ticket-buy">
+                            <a href="">
+                                <button class="ticket-btn">
+                                    <img src="Images/ticket-light.svg">
+                                    <span> Mua vé</span>
+                                </button>
+                            </a> 
+                        </div>
+                        <div class="title-main">TASTES OF HORROR</div>
+                        <div class="title-sub">ÂM HỒN ĐÔ THỊ</div>
+                    </div>
+                </div>
+                <div class="movie-item">
+                    <div class="movie-article">
+                        <div style="background-color: #000000; margin-bottom: 15px;">
+                            <a><img class="movie-image" src="Images/films/nguoivocuoicung.jpg"></a>
+                        </div>
+                        <div class="movie-ticket-buy">
+                            <a href="">
+                                <button class="ticket-btn">
+                                    <img src="Images/ticket-light.svg">
+                                    <span> Mua vé</span>
+                                </button>
+                            </a> 
+                        </div>
+                        <div>NGƯỜI VỢ CUỐI CÙNG</div>
+                        <div class="title-sub"></div>
+                    </div>
+                </div>
+                <div class="movie-item">
+                    <div class="movie-article">
+                        <div style="background-color: #000000; margin-bottom: 15px;">
+                            <a><img class="movie-image"src="Images/films/taylorswift.jpg"></a>
+                        </div>
+                        <div class="movie-ticket-buy">
+                            <a href="">
+                                <button class="ticket-btn">
+                                    <img src="Images/ticket-light.svg">
+                                    <span> Mua vé</span>
+                                </button>
+                            </a> 
+                        </div>
+                        <div>TAYLOR SWIFT | THE ERAS TOUR</div>
+                        <div class="title-sub">NHỮNG KỶ NGUYÊN CỦA TAYLOR SWIFT</div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <!-- <div class="movie-more">
+                <a>XEM THÊM ></a>
+            </div> -->
+        </div>
+        <br>
+        <br>
+        <br>
+        <!-- Tab chuyển đổi -->
+        <!-- <div class="tab">
+            <span class="border"></span>
+            <div class="tab-header">GÓC ĐIỆN ẢNH</div>
+            <button class="bloglinks" onclick="openBlog(event, 'BINHLUANPHIM')">Bình luận phim</button>
+            <button class="bloglinks" onclick="openBlog(event, 'BLOGDIENANH')">Blog điện ảnh</button>
+        </div> -->
+        <!-- Bình luận phim -->
+        <!-- <div id="BINHLUANPHIM" class="blogcontent">
+            <div class="articles">
+                <div class="big-article">
+                    <a><img src="Images/blog/pastlive.png"></a>
+                    <a>[Review] Past Lives: Nếu Hiện Tại Là "Kiếp Trước", Vậy Kiếp Sau Đã Đủ 8000 Lớp Nhân Duyên?</a>
+                </div>
+                <div class="small-articles">
+                    <div class="small-artc">
+                        <a><img src="Images/blog/drpn.png"></a>
+                        <a>[Preview] Đất Rừng Phương Nam: Có Vượt Qua Cái Bóng Khổng Lồ Của Bản Cũ?</a>
+                    </div>
+                    <div class="small-artc">
+                        <a><img src="Images/blog/thecreator.png"></a>
+                        <a>[Review] The Creator: Khi Robot Biết Nói Tiếng Việt Và Nhân Văn Hơn Cả Con Người</a>
+                    </div>
+                    <div class="small-artc">
+                        <a><img src="Images/blog/hauntingvenice.png"></a>
+                        <a>[Review] A Haunting In Venice: Khi Thám Tử Đối Đầu Ma Quỷ!</a>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="movie-more">
+                <a>XEM THÊM ></a>
+            </div>
+        </div> -->
+        <!-- Blog điện ảnh -->
+        <!-- <div id="BLOGDIENANH" class="blogcontent">
+            <div class="articles">
+                <div class="big-article">
+                    <a><img src="Images/blog/martin.png"></a>
+                    <a>Martin Scorsese Và Siêu Phẩm Ở Tuổi 80</a>
+                </div>
+                <div class="small-articles">
+                    <div class="small-artc">
+                        <a><img src="Images/blog/999.png"></a>
+                        <a>999 Câu Hỏi Của Người Lần Đầu Tới Rạp Chiếu Phim</a>
+                    </div>
+                    <div class="small-artc">
+                        <a><img src="Images/blog/theexorcist.png"></a>
+                        <a>The Exorcist: Thương Hiệu Kinh Dị Đình Đám Nhất Thế Kỷ 20 Trở Lại</a>
+                    </div>
+                    <div class="small-artc">
+                        <a><img src="Images/blog/leonardo.png"></a>
+                        <a>Có Gì Mới Trong Bom Tấn Sắp Ra Mắt Của Leonardo DiCaprio?</a>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="movie-more">
+                <a>XEM THÊM ></a>
+            </div>
+        </div> -->
+        <br>
+        <br>
+        <!-- Tin khuyến mãi -->
+        <div class="tab">
+            <span class="border"></span>
+            <div class="tab-header">TIN KHUYẾN MÃI</div>
+        </div>
+        <div class="container">
+            <div class="container-data">
+                <a><img src="Images/promotion/membership.png"></a>
+                <a>Chào 2023, Đón Mưa Quà Tặng Thành Viên Từ Galaxy Cinema!</a>
+            </div>
+            <div class="container-data">
+                <a><img src="Images/promotion/phanloaidotuoi.png"></a>
+                <a>Tiêu Chí Phân Loại Phim Theo Lứa Tuổi</a>
+            </div>
+            <div class="container-data">
+                <a><img src="Images/promotion/khaitruong.png"></a>
+                <a>Tặng Vé - Tặng Thêm Quà - Chỉ Có Tại Galaxy GO! Mall</a>
+            </div>
+            <div class="container-data">
+                <a><img src="Images/promotion/backschool.png"></a>
+                <a>Tựu Trường Hưởng Thụ Liên Hoàn Deal</a>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <!-- Thông tin rạp chiếu phim -->
+        <div class="tab">
+            <span class="border"></span>
+            <div class="tab-header">GALAXY CINEMA</div>
+        </div>
+        <div class="information">
+            <p>
+                <span>
+                    <a href="home.html"><b>Galaxy Cinema</b></a>
+                    là một trong những công ty tư nhân đầu tiên về điện ảnh được thành lập từ năm 2003, 
+                    đã khẳng định thương hiệu là 1 trong 10 địa điểm vui chơi giải trí được yêu thích nhất. 
+                    Ngoài hệ thống rạp chiếu phim hiện đại, thu hút hàng triệu lượt người đến xem,
+                    <a href="home.html"><b>Galaxy Cinema</b></a>
+                    còn hấp dẫn khán giả bởi không khí thân thiện cũng như chất lượng dịch vụ hàng đầu.
+                </span>
+            </p>
+            <p>
+                <span>
+                    Đến website
+                    <a href="home.html"><i>galaxycine.vn</i></a>
+                    khách hàng sẽ dễ dàng tham khảo các phim hay nhất, phim mới nhất đang chiếu hoặc sắp 
+                    chiếu luôn được cập nhật thường xuyên. 
+                    <a><i>Lịch chiếu</i></a>
+                    tại tất cả hệ thống rạp chiếu phim của
+                    <a href="home.html"><b>Galaxy Cinema</b></a>
+                    cũng được cập nhật đầy đủ hàng ngày hàng giờ trên trang chủ.
+                </span>
+            </p>
+            <p>
+                <span>
+                    Từ vũ trụ điện ảnh Marvel, người hâm mộ sẽ có cuộc tái ngộ với Người Nhện qua 
+                    <i>Spider-Man: No Way Home</i>
+                    hoặc
+                    <i>Doctor Strange 2</i>
+                    . Ngoài ra 
+                    <i>007: No Time To Die, Turning Red, Minions: The Rise Of Gru</i>
+                    ..., là những tác phẩm hứa hẹn sẽ gây bùng nổ phòng vé trong thời gian tới.
+                </span>
+            </p>
+            <p>
+                <span>
+                    Giờ đây đặt vé tại 
+                    <a href="home.html"><b>Galaxy Cinema</b></a>
+                    càng thêm dễ dàng chỉ với vài thao tác vô cùng đơn giản. Để mua vé, hãy vào tab Mua vé. 
+                    Quý khách có thể chọn Mua vé theo phim, theo rạp, hoặc theo ngày. Sau đó, tiến hành mua vé 
+                    theo các bước hướng dẫn. Chỉ trong vài phút, quý khách sẽ nhận được tin nhắn và email phản hồi 
+                    <i>Đặt vé thành công</i>
+                    của
+                    <a href="home.html"><b>Galaxy Cinema</b></a>
+                    . Quý khách có thể dùng tin nhắn lấy vé tại quầy vé của
+                    <a href="home.html"><b>Galaxy Cinema</b></a>
+                    hoặc quét mã QR để một bước vào rạp mà không cần tốn thêm bất kỳ công đoạn nào nữa.
+                </span>
+            </p>
+            <p>
+                <span>
+                    Nếu bạn đã chọn được phim hay để xem, hãy đặt vé cực nhanh bằng box 
+                    <i>Mua Vé Nhanh</i>
+                    ngay từ 
+                    <a href="home.html"><i>Trang chủ</i></a>
+                    . Chỉ cần một phút, tin nhắn và email phản hồi của 
+                    <a href="home.html"><b>Galaxy Cinema</b></a>
+                    sẽ gửi ngay vào điện thoại và hộp mail của bạn. 
+                </span>
+            </p>
+            <p>
+                <span>
+                    Nếu chưa quyết định sẽ xem 
+                    <i>phim mới</i>
+                    nào, hãy tham khảo các bộ phim hay trong mục 
+                    <a><i>Phim đang chiếu</i></a>
+                    cũng như 
+                    <a><i>Phim sắp chiếu</i></a>
+                    tại rạp chiếu phim bằng cách vào mục 
+                    <a><i>Bình luận phim</i></a>
+                    ở 
+                    <a><i>Góc điện ảnh</i></a>
+                    để đọc những bài bình luận chân thật nhất, tham khảo và cân nhắc. Sau đó, chỉ việc đặt vé bằng box 
+                    <i>Mua vé nhanh</i>
+                    ngay ở đầu trang để chọn được suất chiếu và chỗ ngồi vừa ý nhất.  
+                </span>
+            </p>
+            <p>
+                <span>
+                    <a href="home.html"><b>Galaxy Cinema</b></a>
+                    luôn có những chương trình
+                    <a><i>khuyến mãi, ưu đãi</i></a>
+                    , quà tặng vô cùng hấp dẫn như 
+                    <i>giảm giá</i>
+                    vé, tặng vé xem phim miễn phí, tặng Combo, tặng quà phim…  dành cho các khách hàng.
+                </span>
+            </p>
+            <p>
+                <span>
+                    Trang web 
+                    <i>galaxycine.vn</i>
+                    còn có mục 
+                    <i>Góc Điện Ảnh</i>
+                    - nơi lưu trữ dữ liệu về phim, diễn viên và đạo diễn, những bài viết chuyên sâu về điện ảnh, 
+                    hỗ trợ người yêu phim dễ dàng hơn trong việc lựa chọn phim và bổ sung thêm kiến thức về điện ảnh 
+                    cho bản thân. Ngoài ra, vào mỗi tháng, 
+                    <a href="home.html"><b>Galaxy Cinema</b></a>
+                    cũng giới thiệu các 
+                    <a><i>Phim sắp chiếu</i></a>
+                    hot nhất trong mục 
+                    <a><i>Phim Hay Tháng</i></a>.
+                </span>
+            </p>
+            <p>
+                <span>
+                    Hiện nay, 
+                    <a href="home.html"><b>Galaxy Cinema</b></a>
+                    đang ngày càng phát triển hơn nữa với các chương trình đặc sắc, các khuyến mãi hấp dẫn, đem đến 
+                    cho khán giả những bộ phim bom tấn của thế giới và Việt Nam nhanh chóng và sớm nhất.
+                </span>
+            </p>
+        </div>
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-container">
+                <div class="footer-top">
+                    <div style="width: 25%;">
+                        <h3 class="footer-title">GIỚI THIỆU</h3>
+                        <ul>
+                            <li><a>Về Chúng Tôi</a></li>
+                            <li><a>Thỏa Thuận Sử Dụng</a></li>
+                            <li><a>Quy Chế Hoạt Động</a></li>
+                            <li><a>Chính Sách Bảo Mật</a></li>
+                        </ul>
+                    </div>
+                    <div style="width: 25%;">
+                        <h3 class="footer-title">GÓC ĐIỆN ẢNH</h3>
+                        <ul>
+                            <li><a>Thể Loại Phim</a></li>
+                            <!-- <li><a>Bình Luận Phim</a></li>
+                            <li><a>Blog Điện Ảnh</a></li> -->
+                            <li><a>Phim Hay Tháng</a></li>
+                        </ul>
+                    </div>
+                    <div style="width: 25%;">
+                        <h3 class="footer-title">HỖ TRỢ</h3>
+                        <ul>
+                            <li><a>Góp Ý</a></li>
+                            <li><a>Sale & Services</a></li>
+                            <li><a>Rạp / Giá Vé</a></li>
+                            <li><a>Tuyển Dụng</a></li>
+                            <li><a>FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div style="width: 25%;">
+                        <div class="footer-logo">
+                            <img src="Images/footer/galaxycine_logo.svg">
+                        </div>
+                        <ul style="display: flex;">
+                            <li class="footer-connect"><a><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-facebook" class="svg-inline--fa fa-square-facebook fa-2x " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z"></path></svg></a></li>
+                            <li class="footer-connect"><a><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="youtube" class="svg-inline--fa fa-youtube fa-2x " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg></a></li>
+                            <li class="footer-connect"><a><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-instagram" class="svg-inline--fa fa-square-instagram fa-2x " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224,202.66A53.34,53.34,0,1,0,277.36,256,53.38,53.38,0,0,0,224,202.66Zm124.71-41a54,54,0,0,0-30.41-30.41c-21-8.29-71-6.43-94.3-6.43s-73.25-1.93-94.31,6.43a54,54,0,0,0-30.41,30.41c-8.28,21-6.43,71.05-6.43,94.33S91,329.26,99.32,350.33a54,54,0,0,0,30.41,30.41c21,8.29,71,6.43,94.31,6.43s73.24,1.93,94.3-6.43a54,54,0,0,0,30.41-30.41c8.35-21,6.43-71.05,6.43-94.33S357.1,182.74,348.75,161.67ZM224,338a82,82,0,1,1,82-82A81.9,81.9,0,0,1,224,338Zm85.38-148.3a19.14,19.14,0,1,1,19.13-19.14A19.1,19.1,0,0,1,309.42,189.74ZM400,32H48A48,48,0,0,0,0,80V432a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V80A48,48,0,0,0,400,32ZM382.88,322c-1.29,25.63-7.14,48.34-25.85,67s-41.4,24.63-67,25.85c-26.41,1.49-105.59,1.49-132,0-25.63-1.29-48.26-7.15-67-25.85s-24.63-41.42-25.85-67c-1.49-26.42-1.49-105.61,0-132,1.29-25.63,7.07-48.34,25.85-67s41.47-24.56,67-25.78c26.41-1.49,105.59-1.49,132,0,25.63,1.29,48.33,7.15,67,25.85s24.63,41.42,25.85,67.05C384.37,216.44,384.37,295.56,382.88,322Z"></path></svg></a></li>
+                        </ul>
+                        <div class="footer-logo">
+                            <a href="http://online.gov.vn/Home/WebDetails/5005?AspxAutoDetectCookieSupport=1"><img style="width: 168px;" src="Images/footer/logoSaleNoti.png"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="footer-logo">
+                        <img src="Images/footer/galaxycine_logo.svg">
+                    </div>
+                    <div class="footer-inf">
+                        <h3>CÔNG TY CỔ PHẦN PHIM THIÊN NGÂN</h3>
+                        <p>Toà nhà Bitexco Nam Long, 63A Võ Văn Tần, Phường 6, Quận 3, Tp. Hồ Chí Minh, Việt Nam</p>
+                        <p>028.39.333.303 - 19002224 (9:00 - 22:00) - hotro@galaxystudio.vn</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Phần Javascript -->
+        <script>
+            
+            // //Show/Hide Password
+            // function showPass() {
+            //     var x = document.getElementById("myPass");
+            //     if (x.type === "password") {
+            //         x.type = "text";
+            //     } else {
+            //         x.type = "password";
+            //     }
+            // }
+            // function showRegisterPass() {
+            //     var x = document.getElementById("myRPass1");
+            //     var y = document.getElementById("myRPass2");
+            //     if (x.type === "password") {
+            //         x.type = "text";
+            //         y.type = "text";
+            //     } else {
+            //         x.type = "password";
+            //         y.type = "password";
+            //     }
+            // }
+            // //Slideshow quảng cáo
+            // let slideIndex = 0;
+            // showSlides();
+
+            // function plusSlides(n) {
+            //     showSlides(slideIndex += n);
+            //     let i;
+            //     let slides = document.getElementsByClassName("mySlides");
+            //     for (i = 0; i < slides.length; i++) {
+            //         slides[i].style.display = "none";
+            //     }
+            //     slideIndex++;
+            //     if (slideIndex > slides.length) {slideIndex = 1}
+            //     slides[slideIndex-1].style.display = "block";
+            //     setTimeout(showSlides, 3000);
+            // }
+
+            // function currentSlide(n) {
+            //     showSlides(slideIndex = n);
+            //     let i;
+            //     let slides = document.getElementsByClassName("mySlides");
+            //     for (i = 0; i < slides.length; i++) {
+            //         slides[i].style.display = "none";
+            //     }
+            //     slideIndex++;
+            //     if (slideIndex > slides.length) {slideIndex = 1}
+            //     slides[slideIndex-1].style.display = "block";
+            //     setTimeout(showSlides, 3000);
+            // }
+
+            // function showSlides() {
+            //     let i;
+            //     let slides = document.getElementsByClassName("mySlides");
+            //     let dots = document.getElementsByClassName("dot");
+            //     for (i = 0; i < slides.length; i++) {
+            //         slides[i].style.display = "none";
+            //     }
+            //     for (i = 0; i < dots.length; i++) {
+            //     dots[i].className = dots[i].className.replace(" active", "");
+            //     }
+            //     slideIndex++;
+            //     if (slideIndex > slides.length) {slideIndex = 1}
+            //     slides[slideIndex-1].style.display = "block";
+            //     dots[slideIndex-1].className += " active";
+            //     setTimeout(showSlides, 3000);
+            // }
+            // //Mở các tab
+            // function onReload(){
+            //     openTab(event, 'PHIMDANGCHIEU');
+            //     openBlog(event, 'BINHLUANPHIM');
+            // }
+            // window.onload = onReload;
+            
+            // //Tab phim đang chiếu, phim sắp chiếu
+            // openTab(event, 'PHIMDANGCHIEU');
+            // function openTab(evt, tabName) {
+            //     var i, tabcontent, tablinks;
+
+            //     tabcontent = document.getElementsByClassName("tabcontent");
+            //     for (i = 0; i < tabcontent.length; i++) {
+            //         tabcontent[i].style.display = "none";
+            //     }
+
+            //     tablinks = document.getElementsByClassName("tablinks");
+            //         for (i = 0; i < tablinks.length; i++) {
+            //         tablinks[i].className = tablinks[i].className.replace(" active", "");
+            //     }
+            //     document.getElementById(tabName).style.display = "block";
+            //     evt.currentTarget.className += " active";
+            // }
+
+            // //Tab blog bình luận phim, blog điện ảnh
+            // openBlog(event, 'BINHLUANPHIM');
+            // function openBlog(evt, blogName) {
+            //     var i, blogcontent, bloglinks;
+
+            //     blogcontent = document.getElementsByClassName("blogcontent");
+            //     for (i = 0; i < blogcontent.length; i++) {
+            //         blogcontent[i].style.display = "none";
+            //     }
+
+            //     bloglinks = document.getElementsByClassName("bloglinks");
+            //         for (i = 0; i < bloglinks.length; i++) {
+            //         bloglinks[i].className = bloglinks[i].className.replace(" active", "");
+            //     }
+            //     document.getElementById(blogName).style.display = "block";
+            //     evt.currentTarget.className += " active";
+            // }
+            
+        </script>    
+    </body>
+</html>

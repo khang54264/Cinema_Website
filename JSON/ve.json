@@ -1,0 +1,52 @@
+{
+    "ve":[
+        {
+            "mave": "V01",
+            "mathanhvien": "TV01",
+            "hoten": "Luong Tuan Khang",
+            "sodienthoai": "0962627008",
+            "phim" : "ĐẤT RỪNG PHƯƠNG NAM",
+            "suatchieu" : "SC01"
+        },
+        {
+            "mave": "V02",
+            "mathanhvien": "TV02",
+            "hoten": "Pham Tuan Kiet",
+            "sodienthoai": "0966031884",
+            "phim" : "ĐẤT RỪNG PHƯƠNG NAM",
+            "suatchieu" : "SC01"
+        },
+        {
+            "mave": "V03",
+            "mathanhvien": "TV03",
+            "hoten": "Phan Van Tri",
+            "sodienthoai": "0977435887",
+            "phim" : "GIA ĐÌNH QUÁI VẬT",
+            "suatchieu" : "SC04"
+        },
+        {
+            "mave": "V04",
+            "mathanhvien": "TV04",
+            "hoten": "Dao Thien Minh",
+            "sodienthoai": "0933247741",
+            "phim" : "GIA ĐÌNH QUÁI VẬT",
+            "suatchieu" : "SC04"
+        },
+        {
+            "mave": "V05",
+            "mathanhvien": "TV05",
+            "hoten": "Tran Thi Trang",
+            "sodienthoai": "0988412554",
+            "phim" : "CÚ MÁY ĂN TIỀN",
+            "suatchieu" : "SC03"
+        },
+        {
+            "mave": "V06",
+            "mathanhvien": "TV06",
+            "hoten": "Doan Minh Dat",
+            "sodienthoai": "0977918181",
+            "phim" : "CÚ MÁY ĂN TIỀN",
+            "suatchieu" : "SC03"
+        }
+    ]
+}

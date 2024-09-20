@@ -1,0 +1,46 @@
+{
+    "dichvu":[
+        {
+            "anhminhhoa":"Images/dichvu/combowish1.png",
+            "tendichvu": "iCombo Wish 1",
+            "mota": "1 Ly Wish Tumbler + 1 Ly Nước Ngọt Size L + 1 Hộp Bắp",
+            "giatien": "249.000"
+        },
+        {
+            "anhminhhoa":"Images/dichvu/combowish2.png",
+            "tendichvu": "iCombo Wish 2",
+            "mota": "1 Ly Wish Tumbler + 2 Ly Nước Ngọt Size L + 1 Hộp Bắp",
+            "giatien": "269.000"
+        },
+        {
+            "anhminhhoa":"Images/dichvu/wishtumbler.png",
+            "tendichvu": "iLy Wish Tumbler",
+            "mota": "1 Ly Wish Tumblerp + 1 Ly Nước Ngọt Size L",
+            "giatien": "219.000"
+        },
+        {
+            "anhminhhoa":"Images/dichvu/combo2bigextra.png",
+            "tendichvu": "iCombo 2 Big Extra STD",
+            "mota": "02 Ly nước ngọt size L + 01 Hộp bắp + 1 Snack",
+            "giatien": "129.000"
+        },
+        {
+            "anhminhhoa":"Images/dichvu/combo1bigextra.png",
+            "tendichvu": "iCombo 1 Big Extra STD",
+            "mota": "1 Ly nước ngọt size L + 01 Hộp bắp + 1 Snack",
+            "giatien": "109.000"
+        },
+        {
+            "anhminhhoa":"Images/dichvu/combo2big.png",
+            "tendichvu": "iCombo 2 Big STD",
+            "mota": "02 Ly nước ngọt size L + 01 Hộp bắp",
+            "giatien": "109.000"
+        },
+        {
+            "anhminhhoa":"Images/dichvu/combo1big.png",
+            "tendichvu": "iCombo 1 Big STD",
+            "mota": "01 Ly nước ngọt size L + 01 Hộp bắp",
+            "giatien": "89.000"
+        }
+    ]
+}

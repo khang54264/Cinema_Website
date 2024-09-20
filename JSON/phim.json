@@ -1,0 +1,49 @@
+{
+    "phim":[
+        {
+            "maphim": "P01",
+            "tenphim": "Đất Rừng Phương Nam",
+            "thoiluong": 110,
+            "ngayramat": "05/10/2023",
+            "daodien" : "Nguyễn Quang Dũng",
+            "quocgiasx" : "Việt Nam",
+            "nhasanxuat" : "HK Film, Galaxy Play, Trấn Thành Town"
+        },
+        {
+            "maphim": "P02",
+            "tenphim": "Wonka",
+            "thoiluong": 116,
+            "ngayramat": "06/12/2023",
+            "daodien" : "Paul King",
+            "quocgiasx" : "Mỹ",
+            "nhasanxuat" : "Warner Bros"
+        },
+        {
+            "maphim": "P03",
+            "tenphim": "Cú Máy Ăn Tiền",
+            "thoiluong": 132,
+            "ngayramat": "13/10/2023",
+            "daodien" : "Kim Jee Woon",
+            "quocgiasx" : "Hàn Quốc",
+            "nhasanxuat" : "Barunson Studio"
+        },
+        {
+            "maphim": "P04",
+            "tenphim": "Giao Lộ 8675",
+            "thoiluong": 107,
+            "ngayramat": "03/10/2023",
+            "daodien" : "Tân DS",
+            "quocgiasx" : "Việt Nam",
+            "nhasanxuat" : "Đang Cập Nhật"
+        },
+        {
+            "maphim": "P05",
+            "tenphim": "Quỷ Ám: Tín Đồ",
+            "thoiluong": 111,
+            "ngayramat": "06/10/2023",
+            "daodien" : "David Gordon Green",
+            "quocgiasx" : "Hàn Quốc",
+            "nhasanxuat" : "Universal Pictures, Blumhouse Productions"
+        }
+    ]
+}

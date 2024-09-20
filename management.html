@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <title>Galaxy Cinema | Rạp chiếu phim hay nhất Việt Nam 2023</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script type="text/Javascript" src="JS/jquery-3.6.0.min.js" defer></script>
+        <link rel="stylesheet" type="text/css" href="CSS/management.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <script src="JS/angular.min.js"></script>
+        <script src="JS/global.js"></script>
+        <script src="JS/management.js"></script>            
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    </head>
+    <body ng-app="QLRCP">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-icon">
+                <a href="home.html"><img src="Images/galaxy-logo.png" class="icon"></a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm tên phim, diễn viên...">
+                <button type="submit" class="search-btn"><img src="Images/magnifying-glass-solid.svg"></button>
+            </div>
+            <div class="login">
+                <a onclick="document.getElementById('id01').style.display='none'" style="width:auto;"><img src="Images/user-solid.svg">  Admin</a>
+            </div>
+            <div id="id01" class="modal">
+                <form class="modal-content animate" id="loginForm">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        <img src="Images/login-img.svg" alt="Avatar" class="avatar">
+                    </div>
+                    <div class="login-form">
+                        <label for="email"><b>Tên đăng nhập</b></label>
+                        <input ng-model="username" id="email" type="text" placeholder="Nhập tên đăng nhập hoặc email" required >
+                        <label for="psw"><b>Mật Khẩu</b></label>
+                        <input ng-model="password" id = "myPass" type="password" placeholder="Nhập Mật Khẩu" required>
+                        <label>
+                            <input type="checkbox" onclick="showPass()">Hiển thị mật khẩu
+                        </label>
+                        <button class="login-btn" type="submit" ng-click="login()">ĐĂNG NHẬP</button>
+                        <a href="#" class="psw">Quên mật khẩu?</a>
+                        <div class="login-border"></div>
+                    </div>            
+                    <div class="register-form" style="background-color:#f1f1f1">
+                        <label>Bạn chưa có tài khoản?</label>
+                        <button type="button" onclick="document.getElementById('id01').style.display='none';
+                                                       document.getElementById('id02').style.display='block'" class="register-btn">ĐĂNG KÝ</button>
+                        
+                    </div>
+                </form>
+            </div>
+            <div id="id02" class="modal">
+                <form class="modal-content animate" method="post">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        <img src="Images/login-img.svg" alt="Avatar" class="avatar">
+                    </div>
+                    <div class="login-form">
+                        <label for="name"><b>Họ và tên</b></label>
+                        <input type="text" placeholder="Nhập Họ và tên" required>
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" placeholder="Nhập Email" required>
+                        <label for="number"><b>Số điện thoại</b></label>
+                        <input type="text" placeholder="Nhập Số điện thoại" required>
+                        <label for="gender"><b>Giới tính</b></label>
+                        <label class="radio-btns"> Nam
+                            <input type="radio" name="radio">
+                            <span class="checkmark"></span>              
+                        </label>
+                        <label class="radio-btns"> Nữ
+                            <input type="radio" name="radio">
+                            <span class="checkmark"></span>              
+                        </label>
+                        <label for="psw"><b>Mật Khẩu</b></label>
+                        <input id="myRPass1" type="password" placeholder="Nhập Mật Khẩu" required>
+                        <label for="psw"><b>Nhập lại mật Khẩu</b></label>
+                        <input id="myRPass2" type="password" placeholder="Nhập lại Mật Khẩu" required>
+                        <label>
+                            <input type="checkbox" onclick="showRegisterPass()">Hiển thị mật khẩu
+                        </label>
+                        <button class="login-btn" type="submit">HOÀN THÀNH</button>
+                        <div class="login-border"></div>
+                    </div>            
+                    </div>
+                </form>
+            </div>           
+        </div>
+        <!-- Menu -->
+        <div class="menu">
+            <div class="nav-ctl">
+                <nav>
+                    <ul class="primary-nav">
+                        <li><a href="muave.html">MUA VÉ</a></li>
+                        <li>
+                            <div class="dropdown">
+                                <a href="">PHIM</a>
+                            </div>
+                            <div class="dropdown-content">
+                                <div class="drp-header">
+                                    <div class="drp-main">
+                                        <h4>PHIM ĐANG CHIẾU</h4>
+                                    </div>
+                                    <div class="drp-row">
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/datrungphuongnam.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">ĐẤT RỪNG PHƯƠNG NAM</h4>
+                                                <h4 class="title-sub"></h4>
+                                            </div>    
+                                        </div>
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/quyam.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">THE EXORCIST: BELIEVER</h4>
+                                                <h4 class="title-sub">QUỶ ÁM: TÍN ĐỒ</h4>
+                                            </div>
+                                        </div>
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/cobweb.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">COBWEB</h4>
+                                                <h4 class="title-sub">CÚ MÁY ĂN TIỀN</h4>
+                                            </div>
+                                        </div>
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/wonka.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="phim2.html">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">WONKA</h4>
+                                                <h4 class="title-sub"></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="drp-main" style="top: 0;">
+                                        <h4>PHIM SẮP CHIẾU</h4>
+                                    </div>
+                                    <div class="drp-row">
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/monsterfamily.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">GIA ĐÌNH QUÁI VẬT</h4>
+                                                <h4 class="title-sub"></h4>
+                                            </div>    
+                                        </div>
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/flowermoon.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">KILLERS OF THE FLOWER MOON</h4>
+                                                <h4 class="title-sub">VẦNG TRĂNG MÁU</h4>
+                                            </div>
+                                        </div>
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/tasteofhorror.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">TASTES OF HORROR</h4>
+                                                <h4 class="title-sub">ÂM HỒN ĐÔ THỊ</h4>
+                                            </div>
+                                        </div>
+                                        <div class="drp-column">
+                                            <img class="drp-image" src="Images/films/fnaf.jpg">
+                                            <div class="ticket-buy">
+                                                <a href="">
+                                                    <button class="ticket-btn">
+                                                        <img src="Images/ticket-light.svg">
+                                                        <span> Mua vé</span>
+                                                    </button>
+                                                </a> 
+                                            </div>
+                                            <div class="drp-title">
+                                                <h4 class="title-main">FIVE NIGHTS AT FREDDY'S</h4>
+                                                <h4 class="title-sub">NĂM ĐÊM KINH HOÀNG</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown">
+                                <a href="">GÓC ĐIỆN ẢNH</a>
+                            </div>
+                            <div class="dropdown-cont">
+                                <div class="drp-row">
+                                    <div class="drp-menu">
+                                        <a>THỂ LOẠI PHIM</a>
+                                        <a>DIỄN VIÊN</a>
+                                        <a>ĐẠO DIỄN</a>
+                                        <!-- <a>BÌNH LUẬN PHIM</a>
+                                        <a>BLOG ĐIỆN ẢNH</a> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown">
+                                <a href="">SỰ KIỆN</a>
+                            </div>
+                            <div class="dropdown-cont">
+                                <div class="drp-row">
+                                    <div class="drp-menu">
+                                        <a href="dsuudai.html">ƯU ĐÃI</a>
+                                        <a>PHIM HAY THÁNG</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="">RẠP/GIÁ VÉ</a></li>
+                        <li><a href="">HỖ TRỢ</a></li>
+                        <li><a href="">THÀNH VIÊN</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="work-place">
+            <!-- Tab chuyển đổi -->
+            <div class="tab">
+                <button class="tablinks" onclick="openTab(event, 'QLDATVEGIAVE')">QUẢN LÝ VÉ</button>
+                <button class="tablinks" onclick="openTab(event, 'QLSUATCHIEU')">QUẢN LÝ SUẤT CHIẾU</button>
+                <button class="tablinks" onclick="openTab(event, 'QLPHONGCHIEU')">QUẢN LÝ PHÒNG CHIẾU</button>
+                <button class="tablinks" onclick="openTab(event, 'QLPHIM')">QUẢN LÝ PHIM</button>
+                <button class="tablinks" onclick="openTab(event, 'QLTHELOAI')">QUẢN LÝ THỂ LOẠI</button>
+                <button class="tablinks" onclick="openTab(event, 'QLKHUYENMAI')">QUẢN LÝ KHUYẾN MÃI</button>
+                <button class="tablinks" onclick="openTab(event, 'QLTHANHVIEN')">QUẢN LÝ THÀNH VIÊN</button>
+                <button class="tablinks" onclick="openTab(event, 'QLNHANVIEN')">QUẢN LÝ NHÂN VIÊN</button>
+                <button class="tablinks" onclick="openTab(event, 'QLDAODIEN')">QUẢN LÝ ĐẠO DIỄN</button>
+                <button class="tablinks" onclick="openTab(event, 'QLDIENVIEN')">QUẢN LÝ DIỄN VIÊN</button>
+                <button class="tablinks" onclick="openTab(event, 'THONGKE')">THỐNG KÊ</button>
+            </div>
+            <!-- QL Suất Chiếu -->
+            <div id="QLSUATCHIEU" class="tabcontent" ng-controller="SuatChieuCtrl">
+                <div class="qlsuatchieu">
+                    <h2>QUẢN LÝ SUẤT CHIẾU TRONG HỆ THỐNG</h2>
+                    <div class="tool">
+                        <button class="btn-add" onclick="document.getElementById('themsuatphim').style.display='block'" ng-click="moForm()">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><style>svg{fill:#ffffff}</style><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                            Thêm suất chiếu phim
+                        </button>
+                        <label for="qlscptktenphim">Mã suất chiếu:</label>
+                        <input class="search-inp" type="search" id="qlscptktenphim" name="qlscptktenphim" placeholder="Nhập mã suất..." ng-model="timsuatchieu">
+                        <!-- <label for="qlscptkphongchieu">Phòng chiếu:</label>
+                        <select class="search-inp" name="qlscptkphongchieu" id="qlscptkphongchieu">
+                            <option value="choose">---Chọn phòng chiếu---</option>
+                            <option value="PC-01">PC-01</option>
+                            <option value="PC-02">PC-02</option>
+                            <option value="PC-03">PC-03</option>
+                            <option value="PC-04">PC-04</option>
+                            <option value="PC-05">PC-05</option>
+                            <option value="PC-06">PC-06</option>
+                            <option value="PC-07">PC-07</option>
+                            <option value="PC-08">PC-08</option>
+                        </select> -->
+                        <button class="btn-search" ng-click="loadSuatChieu()">Tìm kiếm</button>                   
+                    </div>
+                    <div class="table-data">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Mã suất chiếu</th>
+                                    <th>Mã phim</th>
+                                    <th>Phòng chiếu</th>
+                                    <th>Ngày chiếu</th>
+                                    <th>Giờ chiếu</th>
+                                    <th>Loại chiếu</th>
+                                    <th>Sửa</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listSuatChieuPhim">
+                                <tr class="dongsuatchieuphim" ng-repeat="x in listSuatChieu">    
+                                    <td class="oscp">{{x.maSuatChieu}}</td>
+                                    <td class="oscp">{{x.maPhim}}</td>
+                                    <td class="oscp">{{x.maPhongChieu}}</td>
+                                    <td class="oscp">{{x.ngayChieu}}</td>
+                                    <td class="oscp">{{x.gioChieu}}</td>
+                                    <td class="oscp">{{x.loaiChieu}}</td>
+                                    <td class="oscp">
+                                        <button class="btnSua" onclick="document.getElementById('themsuatphim').style.display='block'" ng-click="thongtinSuatChieu(x.maSuatChieu)"><i class="fa-regular fa-pen-to-square"></button></i>
+                                    </td>
+                                    <td class="oscp">
+                                        <button class="btnXoa"><i class="fa-solid fa-trash" ng-click="deleteSuatChieu(x.maSuatChieu)"></i></button>
+                                    </td>          
+                                </tr>     
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="summary">
+                        <div class="box-left">Số lượng suất chiếu: <span id="soluong">0</span></div>
+                        <div class="box-right">
+                            <button><i class="fas fa-angle-left"></i></button>
+                            <button>1</button>
+                            <button>2</button>
+                            <button>3</button>
+                            <button>4</button>
+                            <button><i class="fas fa-angle-right"></i></button>
+                        </div>
+                    </div>                   
+                </div>
+                <div id="themsuatphim" class="themsuatphim">
+                    <form class="themsuatphim-content animate">
+                        <div class="imgcontainer">
+                            <h3>THÊM THÔNG TIN SUẤT CHIẾU PHIM</h3>
+                            <span onclick="document.getElementById('themsuatphim').style.display='none'" class="close" title="Close">&times;</span>
+                        </div>
+                        <div class="themsuatphim-form">
+                            <label for="tscpmascp"><b>Mã suất chiếu:</b></label>
+                            <input type="text" id="tscpmascp" name="tscpmascp" ng-model="MaSuatChieu">
+                            <label for="tscpscp"><b>Tên phim:</b></label>
+                            <select name="tscptpscp" id="tscptpscp" ng-model="MaPhim">
+                                <option value="">---Chọn phim---</option>
+                                <option value="P01">ĐẤT RỪNG PHƯƠNG NAM</option>
+                                <option value="P02">WONKA</option>
+                                <option value="P03">CÚ MÁY ĂN TIỀN</option>
+                                <option value="P04">GIAO LỘ 8675</option>
+                                <option value="P05">QUỶ ÁM: TÍN ĐỒ</option>
+                            </select>
+                            <br>
+                            <label for="tscpphongchieu"><b>Phòng chiếu:</b></label>
+                            <select name="tscpphongchieu" id="tscpphongchieu" ng-model="MaPhongChieu">
+                                <option value="choose">---Chọn phòng chiếu---</option>
+                                <option value="PC01">PC-01</option>
+                                <option value="PC02">PC-02</option>
+                                <option value="PC03">PC-03</option>
+                                <option value="PC04">PC-04</option>
+                                <option value="PC05">PC-05</option>
+                            </select>
+                            <br>
+                            <label for="tscpngaychieu"><b>Ngày chiếu:</b></label>
+                            <input type="text" id="tscpngaychieu" name="tscpngaychieu" ng-model="NgayChieu">
+                            <br>
+                            <label for="tscpgiochieu"><b>Giờ chiếu:</b></label>
+                            <input type="text" id="tscpgiochieu" name="tscpgiochieu" ng-model="GioChieu">
+                            <br>
+                            <label for="tscploaichieu"><b>Loại chiếu:</b></label>
+                            <select name="tscploaichieu" id="tscploaichieu" ng-model="LoaiChieu">
+                                <option value="">---Chọn loại chiếu---</option>
+                                <option value="2D-PD">2D - Phụ Đề</option>
+                                <option value="2D-TM">2D - Thuyết Minh</option>
+                            </select>
+                            <button class="btn-themsuatphim" type="submit" onclick="document.getElementById('themsuatphim').style.display='none'" ng-click="updateSuatChieu()">SỬA SUẤT PHIM</button>
+                            <button class="btn-themsuatphim" type="submit" onclick="document.getElementById('themsuatphim').style.display='none'" ng-click="createSuatChieu()">THÊM SUẤT PHIM</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- QL Đặt Vé -->
+            <div id="QLDATVEGIAVE" class="tabcontent" ng-controller="VeCtrl">
+                <div class="qldatve">
+                    <h2>QUẢN LÝ VÉ</h2>
+                    <div class="tool">
+                        <button class="btn-qlgiave" onclick="document.getElementById('qlgiave').style.display='block'" ng-click="moForm()">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><style>svg{fill:#ffffff}</style><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                            Tạo vé
+                        </button>
+                        <input class="search-inp" type="search" id="timkiemve" name="timkiemve" placeholder="Nhập mã thành viên..." ng-model="timmave">
+                        <button class="btn-search" ng-click="loadVe()">Tìm kiếm</button>                   
+                    </div>
+                    <div class="table-data">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Mã vé</th>
+                                    <th>Mã suất chiếu</th>
+                                    <th>Mã thành viên</th>
+                                    <th>Mã ghế</th>
+                                    <th>Ngày mua</th>
+                                    <th>Giá vé</th>
+                                    <th>Khuyến mãi</th>
+                                    <th>Hủy vé</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listVe">
+                                <tr class="dongphim" ng-repeat="x in listVe">    
+                                    <td class="op">{{x.maVe}}</td>
+                                    <td class="op">{{x.maSuatChieu}}</td>
+                                    <td class="op">{{x.maThanhVien}}</td>
+                                    <td class="op">{{x.maGhe}}</td>
+                                    <td class="op">{{x.ngayMua}}</td>
+                                    <td class="op">{{x.giaVe}}</td>
+                                    <td class="op">{{x.maKhuyenMai}}</td>
+                                    <td class="op">
+                                        <button class="btnXoa"><i class="fa-solid fa-trash" ng-click="deleteVe(x.maVe)"></i></button>
+                                    </td>          
+                                </tr>     
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="summary">
+                        <div class="box-left">Số lượng vé: <span id="soluong">0</span></div>
+                        <div class="box-right">
+                            <button><i class="fas fa-angle-left"></i></button>
+                            <button>1</button>
+                            <button>2</button>
+                            <button>3</button>
+                            <button>4</button>
+                            <button><i class="fas fa-angle-right"></i></button>
+                        </div>
+                    </div>                   
+                </div>
+                <div id="qlgiave" class="qlgiave">
+                    <form class="qlgiave-content animate">
+                        <div class="imgcontainer">
+                            <h3>CẬP NHẬT VÉ</h3>
+                            <span onclick="document.getElementById('qlgiave').style.display='none'" class="close" title="Close">&times;</span>
+                        </div>
+                        <div class="qlgiave-form">
+                            <div>
+                                <div>
+                                    <br>
+                                    <div style="display: flex; margin-top: 5px;">
+                                        <label>Mã vé:</label>
+                                        <input type="text" class="edt-giave" ng-model="MaVe">
+                                    </div>
+                                    <div style="display: flex; margin-top: 5px;">
+                                        <label>Mã suất chiếu</label>
+                                        <input type="text" class="edt-giave" ng-model="MaSuatChieu">
+                                    </div>
+                                    <div style="display: flex; margin-top: 5px;">
+                                        <label>Mã thành viên</label>
+                                        <input type="text" class="edt-giave" ng-model="MaThanhVien">
+                                    </div>
+                                    <div style="display: flex; margin-top: 5px;">
+                                        <label>Mã ghế</label>
+                                        <input type="text" class="edt-giave" ng-model="MaGhe">
+                                    </div>
+                                    <div style="display: flex; margin-top: 5px;">
+                                        <label>Ngày mua:</label>
+                                        <input type="text" class="edt-giave" ng-model="NgayMua">
+                                    </div>
+                                    <div style="display: flex; margin-top: 5px;">
+                                        <label>Giá vé:</label>
+                                        <input type="text" class="edt-giave" ng-model="GiaVe">
+                                    </div>
+                                    <div style="display: flex; margin-top: 5px;">
+                                        <label>Mã khuyến mãi:</label>
+                                        <input type="text" class="edt-giave" ng-model="MaKhuyenMai">
+                                    </div>
+                                </div>
+                            </div>                                          
+                            <button class="btn-suagiave" onclick="document.getElementById('qlgiave').style.display='none'" ng-click="createVe()">TẠO VÉ</button>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- QL Phòng Chiếu -->
+            <div id="QLPHONGCHIEU" class="tabcontent" ng-controller="PhongChieuCtrl">
+                <div class="qlphim">
+                    <h2>QUẢN LÝ PHÒNG CHIẾU</h2>
+                    <div class="tool">
+                        <button class="btn-add" onclick="document.getElementById('themphongchieu').style.display='block'" ng-click="moForm()">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><style>svg{fill:#ffffff}</style><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                            Thêm phòng chiếu
+                        </button>
+                        <label for="qlphimtenphim">Tên phim:</label>
+                        <input class="search-inp" type="search" id="qlphimtenphim" name="qlphimtenphim" placeholder="Nhập mã phòng..." ng-model="timphongchieu">
+                        <button class="btn-search" ng-click="loadPhongChieu()">Tìm kiếm</button>                   
+                    </div>
+                    <div class="table-data">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Mã phòng chiếu</th>
+                                    <th>Tổng số lượng ghế</th>
+                                    <th>Trạng thái</th>
+                                    <th>Sửa</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listPhongChieu"> 
+                                <tr class="dongphim" ng-repeat="x in listPhongChieu">    
+                                    <td class="op">{{x.maPhongChieu}}</td>
+                                    <td class="op">{{x.tongSoGhe}}</td>
+                                    <td class="op">{{x.trangThai}}</td>
+                                    <td class="op">
+                                        <button class="btnSua" onclick="document.getElementById('themphongchieu').style.display='block'" ng-click="thongtinPhongChieu(x.maPhongChieu)"><i class="fa-regular fa-pen-to-square"></button></i>
+                                    </td>
+                                    <td class="op">
+                                        <button class="btnXoa"><i class="fa-solid fa-trash" ng-click="deletePhongChieu(x.maPhongChieu)"></i></button>
+                                    </td>          
+                                </tr>     
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="summary">
+                        <div class="box-left">Số lượng phòng chiếu: <span id="soluong">0</span></div>
+                        <div class="box-right">
+                            <button><i class="fas fa-angle-left"></i></button>
+                            <button>1</button>
+                            <button>2</button>
+                            <button>3</button>
+                            <button>4</button>
+                            <button><i class="fas fa-angle-right"></i></button>
+                        </div>
+                    </div>                   
+                </div>
+                <div id="themphongchieu" class="themphim">
+                    <form class="themphim-content animate">
+                        <div class="imgcontainer">
+                            <h3>CẬP NHẬT PHÒNG CHIẾU</h3>
+                            <span onclick="document.getElementById('themphongchieu').style.display='none'" class="close" title="Close">&times;</span>
+                        </div>
+                        <div class="themphim-form">
+                            <label for="tpmap"><b>Mã phòng chiếu:</b></label>
+                            <input type="text" id="tpmap" name="tpmap" ng-model="MaPhongChieu">
+                            <label for="tptp"><b>Tổng số ghế:</b></label>
+                            <input type="text" id="tptp" name="tptp" ng-model="TongSoGhe">
+                            <label for="tptl"><b>Trạng thái:</b></label>
+                            <input type="text" id="tptl" name="tptl" ng-model="TrangThai">
+                            <button class="btn-themphim" type="submit" onclick="document.getElementById('themphongchieu').style.display='none'" ng-click="updatePhongChieu()">SỬA PHÒNG CHIẾU</button>
+                            <button class="btn-themphim" type="submit" onclick="document.getElementById('themphongchieu').style.display='none'" ng-click="createPhongChieu()">THÊM PHÒNG CHIẾU</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- QL Phim -->
+            <div id="QLPHIM" class="tabcontent" ng-controller="PhimCtrl">
+                <div class="qlphim">
+                    <h2>QUẢN LÝ PHIM TRONG HỆ THỐNG</h2>
+                    <div class="tool">
+                        <button class="btn-add" onclick="document.getElementById('themphim').style.display='block'" ng-click="moForm()">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><style>svg{fill:#ffffff}</style><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                            Thêm mới phim
+                        </button>
+                        <label for="qlphimtenphim">Tên phim:</label>
+                        <input class="search-inp" type="search" id="qlphimtenphim" name="qlphimtenphim" placeholder="Nhập tên phim..." ng-model="timtenphim">
+                        <button class="btn-search" ng-click="loadPhim()">Tìm kiếm</button>                   
+                    </div>
+                    <div class="table-data">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Mã phim</th>
+                                    <th>Tên phim</th>
+                                    <th>Thời lượng</th>
+                                    <th>Ngày ra mắt</th>
+                                    <th>Đạo diễn</th>
+                                    <th>Quốc gia sản xuất</th>
+                                    <th>Nhà sản xuất</th>
+                                    <th>Sửa</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listPhim"> 
+                                <tr class="dongphim" ng-repeat="x in listPhim">    
+                                    <td class="op">{{x.maPhim}}</td>
+                                    <td class="op">{{x.tenPhim}}</td>
+                                    <td class="op">{{x.thoiGianPhim}} phút</td>
+                                    <td class="op">{{x.ngayRaMat}}</td>
+                                    <td class="op">{{x.maDaoDien}}</td>
+                                    <td class="op">{{x.quocGiaSanXuat}}</td>
+                                    <td class="op">{{x.nhaSanXuat}}</td>
+                                    <td class="op">
+                                        <button class="btnSua" onclick="document.getElementById('themphim').style.display='block'" ng-click="thongtinPhim(x.maPhim)"><i class="fa-regular fa-pen-to-square"></button></i>
+                                    </td>
+                                    <td class="op">
+                                        <button class="btnXoa"><i class="fa-solid fa-trash" ng-click="deletePhim(x.maPhim)"></i></button>
+                                    </td>          
+                                </tr>     
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="summary">
+                        <div class="box-left">Số lượng phim: <span id="soluong">0</span></div>
+                        <div class="box-right">
+                            <button><i class="fas fa-angle-left"></i></button>
+                            <button>1</button>
+                            <button>2</button>
+                            <button>3</button>
+                            <button>4</button>
+                            <button><i class="fas fa-angle-right"></i></button>
+                        </div>
+                    </div>                   
+                </div>
+                <div id="themphim" class="themphim">
+                    <form class="themphim-content animate">
+                        <div class="imgcontainer">
+                            <h3>CẬP NHẬT PHIM</h3>
+                            <span onclick="document.getElementById('themphim').style.display='none'" class="close" title="Close">&times;</span>
+                        </div>
+                        <div class="themphim-form">
+                            <label for="tpmap"><b>Mã phim:</b></label>
+                            <input type="text" id="tpmap" name="tpmap" ng-model="MaPhim">
+                            <label for="tptp"><b>Tên phim:</b></label>
+                            <input type="text" id="tptp" name="tptp" ng-model="TenPhim">
+                            <label for="tptl"><b>Thời lượng:</b></label>
+                            <input type="text" id="tptl" name="tptl" ng-model="ThoiLuong">
+                            <label for="tpnrm"><b>Ngày ra mắt:</b></label>
+                            <input type="text" id="tpnrm" name="tpnrm" ng-model="NgayRaMat">
+                            <label for="tpdd"><b>Đạo diễn:</b></label>
+                            <select name="tpdd" id="tpdd" ng-model="MaDaoDien">
+                                <option value="">---Chọn đạo diễn---</option>
+                                <option value="DD01">Nguyễn Quang Dũng</option>
+                                <option value="DD02">Paul King</option>
+                                <option value="DD03">Kim Jee Woon</option>
+                                <option value="DD04">Tân DS</option>
+                                <option value="DD05">David Gordon Green</option>
+                            </select>
+                            <label for="tpqgsx"><b>Quốc gia sản xuất:</b></label>
+                            <input type="text" id="tpqgsx" name="tpqgsx" ng-model="QuocGiaSanXuat">
+                            <label for="tpnsx"><b>Nhà sản xuất:</b></label>
+                            <input type="text" id="tpnsx" name="tpnsx" ng-model="NhaSanXuat">
+                            <button class="btn-themphim" type="submit" onclick="document.getElementById('themphim').style.display='none'" ng-click="updatePhim()">SỬA PHIM</button>
+                            <button class="btn-themphim" type="submit" onclick="document.getElementById('themphim').style.display='none'" ng-click="createPhim()">THÊM PHIM</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- QL Thể Loại Phim -->
+            <div id="QLTHELOAI" class="tabcontent" ng-controller="TheLoaiCtrl">
+                <div class="qlphim">
+                    <h2>QUẢN LÝ THỂ LOẠI</h2>
+                    <div class="tool">
+                        <button class="btn-add" onclick="document.getElementById('themtheloai').style.display='block'" ng-click="moForm()">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><style>svg{fill:#ffffff}</style><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                            Thêm thể loại
+                        </button>
+                        <label for="qlphimtenphim">Tên thể loại:</label>
+                        <input class="search-inp" type="search" id="qlphimtenphim" name="qlphimtenphim" placeholder="Nhập tên thể loại..." ng-model="timtheloai">
+                        <button class="btn-search" ng-click="loadTheLoai()">Tìm kiếm</button>                   
+                    </div>
+                    <div class="table-data">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Mã thể loại</th>
+                                    <th>Tên thể loại</th>
+                                    <th>Sửa</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listTheLoai"> 
+                                <tr class="dongphim" ng-repeat="x in listTheLoai">    
+                                    <td class="op">{{x.maTheLoai}}</td>
+                                    <td class="op">{{x.tenTheLoai}}</td>
+                                    <td class="op">
+                                        <button class="btnSua" onclick="document.getElementById('themtheloai').style.display='block'" ng-click="thongtinTheLoai(x.maTheLoai)"><i class="fa-regular fa-pen-to-square"></button></i>
+                                    </td>
+                                    <td class="op">
+                                        <button class="btnXoa"><i class="fa-solid fa-trash" ng-click="deleteTheLoai(x.maTheLoai)"></i></button>
+                                    </td>          
+                                </tr>     
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="summary">
+                        <div class="box-left">Số lượng thể loại: <span id="soluong">0</span></div>
+                        <div class="box-right">
+                            <button><i class="fas fa-angle-left"></i></button>
+                            <button>1</button>
+                            <button>2</button>
+                            <button>3</button>
+                            <button>4</button>
+                            <button><i class="fas fa-angle-right"></i></button>
+                        </div>
+                    </div>                   
+                </div>
+                <div id="themtheloai" class="themphim">
+                    <form class="themphim-content animate">
+                        <div class="imgcontainer">
+                            <h3>CẬP NHẬT THỂ LOẠI</h3>
+                            <span onclick="document.getElementById('themtheloai').style.display='none'" class="close" title="Close">&times;</span>
+                        </div>
+                        <div class="themphim-form">
+                            <label for="tpmap"><b>Mã thể loại:</b></label>
+                            <input type="text" id="tpmap" name="tpmap" ng-model="MaTheLoai">
+                            <label for="tptp"><b>Tên thể loại:</b></label>
+                            <input type="text" id="tptp" name="tptp" ng-model="TenTheLoai">
+                            <button class="btn-themphim" type="submit" onclick="document.getElementById('themtheloai').style.display='none'" ng-click="updateTheLoai()">SỬA THỂ LOẠI</button>
+                            <button class="btn-themphim" type="submit" onclick="document.getElementById('themtheloai').style.display='none'" ng-click="createTheLoai()">THÊM THỂ LOẠI</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- QL Khuyến Mãi -->
+            <div id="QLKHUYENMAI" class="tabcontent" ng-controller="KhuyenMaiCtrl">
+                <div class="qlphim">
+                    <h2>QUẢN LÝ KHUYẾN MÃI</h2>
+                    <div class="tool">
+                        <button class="btn-add" onclick="document.getElementById('themkhuyenmai').style.display='block'" ng-click="moForm()">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><style>svg{fill:#ffffff}</style><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                            Thêm khuyến mãi
+                        </button>
+                        <label for="qlphimtenphim">Tên khuyến mãi:</label>
+                        <input class="search-inp" type="search" id="qlphimtenphim" name="qlphimtenphim" placeholder="Nhập tên khuyến mãi..." ng-model="timkhuyenmai">
+                        <button class="btn-search" ng-click="loadKhuyenMai()">Tìm kiếm</button>                   
+                    </div>
+                    <div class="table-data">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Mã khuyến mãi</th>
+                                    <th>Tên khuyến mãi</th>
+                                    <th>Mức khuyến mãi</th>
+                                    <th>Thời gian</th>
+                                    <th>Sửa</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listKhuyenMai"> 
+                                <tr class="dongphim" ng-repeat="x in listKhuyenMai">    
+                                    <td class="op">{{x.maKhuyenMai}}</td>
+                                    <td class="op">{{x.tenKhuyenMai}}</td>
+                                    <td class="op">{{x.mucKhuyenMai}}</td>
+                                    <td class="op">{{x.thoiGian}}</td>
+                                    <td class="op">
+                                        <button class="btnSua" onclick="document.getElementById('themkhuyenmai').style.display='block'" ng-click="thongtinKhuyenMai(x.maKhuyenMai)"><i class="fa-regular fa-pen-to-square"></button></i>
+                                    </td>
+                                    <td class="op">
+                                        <button class="btnXoa"><i class="fa-solid fa-trash" ng-click="deleteKhuyenMai(x.maKhuyenMai)"></i></button>
+                                    </td>          
+                                </tr>     
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="summary">
+                        <div class="box-left">Số lượng khuyến mãi: <span id="soluong">0</span></div>
+                        <div class="box-right">
+                            <button><i class="fas fa-angle-left"></i></button>
+                            <button>1</button>
+                            <button>2</button>
+                            <button>3</button>
+                            <button>4</button>
+                            <button><i class="fas fa-angle-right"></i></button>
+                        </div>
+                    </div>                   
+                </div>
+                <div id="themkhuyenmai" class="themphim">
+                    <form class="themphim-content animate">
+                        <div class="imgcontainer">
+                            <h3>CẬP NHẬT KHUYẾN MÃI</h3>
+                            <span onclick="document.getElementById('themkhuyenmai').style.display='none'" class="close" title="Close">&times;</span>
+                        </div>
+                        <div class="themphim-form">
+                            <label for="tpmap"><b>Mã khuyến mãi:</b></label>
+                            <input type="text" id="tpmap" name="tpmap" ng-model="MaKhuyenMai">
+                            <label for="tptp"><b>Tên khuyến mãi:</b></label>
+                            <input type="text" id="tptp" name="tptp" ng-model="TenKhuyenMai">
+                            <label for="tptl"><b>Mức khuyến mãi:</b></label>
+                            <input type="text" id="tptl" name="tptl" ng-model="MucKhuyenMai">
+                            <label for="tpnrm"><b>Thời gian:</b></label>
+                            <input type="text" id="tpnrm" name="tpnrm" ng-model="ThoiGian">
+                            <button class="btn-themphim" type="submit" onclick="document.getElementById('themkhuyenmai').style.display='none'" ng-click="updateKhuyenMai()">SỬA KHUYẾN MÃI</button>
+                            <button class="btn-themphim" type="submit" onclick="document.getElementById('themkhuyenmai').style.display='none'" ng-click="createKhuyenMai()">THÊM KHUYẾN MÃI</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- QL Thành Viên -->
+            <div id="QLTHANHVIEN" class="tabcontent" ng-controller="ThanhVienCtrl">
+                <div class="qlphim">
+                    <h2>QUẢN LÝ THÀNH VIÊN</h2>
+                    <div class="tool">
+                        <button class="btn-add" onclick="document.getElementById('themthanhvien').style.display='block'" ng-click="moForm()">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><style>svg{fill:#ffffff}</style><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                            Thêm thành viên
+                        </button>
+                        <label for="qlphimtenphim">Tên thành viên:</label>
+                        <input class="search-inp" type="search" id="qlphimtenphim" name="qlphimtenphim" placeholder="Nhập tên thành viên..." ng-model="timthanhvien">
+                        <button class="btn-search" ng-click="loadThanhVien()">Tìm kiếm</button>                   
+                    </div>
+                    <div class="table-data">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Mã thành viên</th>
+                                    <th>Tên thành viên</th>
+                                    <th>Ngày sinh</th>
+                                    <th>Giới tính</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Tổng chi tiêu</th>
+                                    <th>Sửa</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listThanhVien"> 
+                                <tr class="dongphim" ng-repeat="x in listThanhVien">    
+                                    <td class="op">{{x.maThanhVien}}</td>
+                                    <td class="op">{{x.tenThanhVien}}</td>
+                                    <td class="op">{{x.ngaySinh}}</td>
+                                    <td class="op">{{x.gioiTinh}}</td>
+                                    <td class="op">{{x.email}}</td>
+                                    <td class="op">{{x.soDienThoai}}</td>
+                                    <td class="op">{{x.tongChiTieu}}</td>
+                                    <td class="op">
+                                        <button class="btnSua" onclick="document.getElementById('themthanhvien').style.display='block'" ng-click="thongtinThanhVien(x.maThanhVien)"><i class="fa-regular fa-pen-to-square"></button></i>
+                                    </td>
+                                    <td class="op">
+                                        <button class="btnXoa"><i class="fa-solid fa-trash" ng-click="deleteThanhVien(x.maThanhVien)"></i></button>
+                                    </td>          
+                                </tr>     
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="summary">
+                        <div class="box-left">Số lượng thành viên: <span id="soluong">0</span></div>
+                        <div class="box-right">
+                            <button><i class="fas fa-angle-left"></i></button>
+                            <button>1</button>
+                            <button>2</button>
+                            <button>3</button>
+                            <button>4</button>
+                            <button><i class="fas fa-angle-right"></i></button>
+                        </div>
+                    </div>                   
+                </div>
+                <div id="themthanhvien" class="themphim">
+                    <form class="themphim-content animate">
+                        <div class="imgcontainer">
+                            <h3>CẬP NHẬT THÀNH VIÊN</h3>
+                            <span onclick="document.getElementById('themthanhvien').style.display='none'" class="close" title="Close">&times;</span>
+                        </div>
+                        <div class="themphim-form">
+                            <label for="tpmap"><b>Mã thành viên:</b></label>
+                            <input type="text" id="tpmap" name="tpmap" ng-model="MaThanhVien">
+                            <label for="tptp"><b>Tên thành viên:</b></label>
+                            <input type="text" id="tptp" name="tptp" ng-model="TenThanhVien">
+                            <label for="tptl"><b>Ngày sinh:</b></label>
+                            <input type="text" id="tptl" name="tptl" ng-model="NgaySinh">
+                            <label for="tpnrm"><b>Giới tính:</b></label>
+                            <input type="text" id="tpnrm" name="tpnrm" ng-model="GioiTinh">
+                            <label for="tpqgsx"><b>Email:</b></label>
+                            <input type="text" id="tpqgsx" name="tpqgsx" ng-model="Email">
+                            <label for="tpnsx"><b>Số điện thoại:</b></label>
+                            <input type="text" id="tpnsx" name="tpnsx" ng-model="SoDienThoai">
+                            <label><b>Tổng chi tiêu:</b></label>
+                            <input type="text"  ng-model="TongChiTieu">
+                            <button class="btn-themphim" type="submit" onclick="document.getElementById('themthanhvien').style.display='none'" ng-click="updateThanhVien()">SỬA PHIM</button>
+                            <button class="btn-themphim" type="submit" onclick="document.getElementById('themthanhvien').style.display='none'" ng-click="createThanhVien()">THÊM PHIM</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- QL Nhân Viên -->
+            <div id="QLNHANVIEN" class="tabcontent" ng-controller="NhanVienCtrl">
+                <div class="qlphim">
+                    <h2>QUẢN LÝ NHÂN VIÊN</h2>
+                    <div class="tool">
+                        <button class="btn-add" onclick="document.getElementById('themnhanvien').style.display='block'" ng-click="moForm()">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><style>svg{fill:#ffffff}</style><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                            Thêm nhân viên
+                        </button>
+                        <label for="qlphimtenphim">Tên nhân viên:</label>
+                        <input class="search-inp" type="search" id="qlphimtenphim" name="qlphimtenphim" placeholder="Nhập tên nhân viên..." ng-model="timnhanvien">
+                        <button class="btn-search" ng-click="loadNhanVien()">Tìm kiếm</button>                   
+                    </div>
+                    <div class="table-data">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Mã nhân viên</th>
+                                    <th>Tên nhân viên</th>
+                                    <th>Ngày sinh</th>
+                                    <th>Giới tính</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Sửa</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listNhanVien"> 
+                                <tr class="dongphim" ng-repeat="x in listNhanVien">    
+                                    <td class="op">{{x.maNhanVien}}</td>
+                                    <td class="op">{{x.tenNhanVien}}</td>
+                                    <td class="op">{{x.ngaySinh}}</td>
+                                    <td class="op">{{x.gioiTinh}}</td>
+                                    <td class="op">{{x.email}}</td>
+                                    <td class="op">{{x.soDienThoai}}</td>
+                                    <td class="op">
+                                        <button class="btnSua" onclick="document.getElementById('themnhanvien').style.display='block'" ng-click="thongtinNhanVien(x.maNhanVien)"><i class="fa-regular fa-pen-to-square"></button></i>
+                                    </td>
+                                    <td class="op">
+                                        <button class="btnXoa"><i class="fa-solid fa-trash" ng-click="deleteNhanVien(x.maNhanVien)"></i></button>
+                                    </td>          
+                                </tr>     
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="summary">
+                        <div class="box-left">Số lượng nhân viên: <span id="soluong">0</span></div>
+                        <div class="box-right">
+                            <button><i class="fas fa-angle-left"></i></button>
+                            <button>1</button>
+                            <button>2</button>
+                            <button>3</button>
+                            <button>4</button>
+                            <button><i class="fas fa-angle-right"></i></button>
+                        </div>
+                    </div>                   
+                </div>
+                <div id="themnhanvien" class="themphim">
+                    <form class="themphim-content animate">
+                        <div class="imgcontainer">
+                            <h3>CẬP NHẬT NHÂN VIÊN</h3>
+                            <span onclick="document.getElementById('themnhanvien').style.display='none'" class="close" title="Close">&times;</span>
+                        </div>
+                        <div class="themphim-form">
+                            <label for="tpmap"><b>Mã nhân viên:</b></label>
+                            <input type="text" id="tpmap" name="tpmap" ng-model="MaNhanVien">
+                            <label for="tptp"><b>Tên nhân viên:</b></label>
+                            <input type="text" id="tptp" name="tptp" ng-model="TenNhanVien">
+                            <label for="tptl"><b>Ngày sinh:</b></label>
+                            <input type="text" id="tptl" name="tptl" ng-model="NgaySinh">
+                            <label for="tpnrm"><b>Giới tính:</b></label>
+                            <input type="text" id="tpnrm" name="tpnrm" ng-model="GioiTinh">
+                            <label for="tpqgsx"><b>Email:</b></label>
+                            <input type="text" id="tpqgsx" name="tpqgsx" ng-model="Email">
+                            <label for="tpnsx"><b>Số điện thoại:</b></label>
+                            <input type="text" id="tpnsx" name="tpnsx" ng-model="SoDienThoai">
+                            <button class="btn-themphim" type="submit" onclick="document.getElementById('themnhanvien').style.display='none'" ng-click="updateNhanVien()">SỬA NHÂN VIÊN</button>
+                            <button class="btn-themphim" type="submit" onclick="document.getElementById('themnhanvien').style.display='none'" ng-click="createNhanVien()">THÊM NHÂN VIÊN</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- QL Đạo Diễn -->
+            <div id="QLDAODIEN" class="tabcontent" ng-controller="DaoDienCtrl">
+                <div class="qlphim">
+                    <h2>QUẢN LÝ ĐẠO DIỄN</h2>
+                    <div class="tool">
+                        <button class="btn-add" onclick="document.getElementById('themdaodien').style.display='block'" ng-click="moForm()">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><style>svg{fill:#ffffff}</style><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                            Thêm đạo diễn
+                        </button>
+                        <label for="qlphimtenphim">Tên đạo diễn:</label>
+                        <input class="search-inp" type="search" id="qlphimtenphim" name="qlphimtenphim" placeholder="Nhập tên đạo diễn..." ng-model="timdaodien">
+                        <button class="btn-search" ng-click="loadDaoDien()">Tìm kiếm</button>                   
+                    </div>
+                    <div class="table-data">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Mã đạo diễn</th>
+                                    <th>Tên đạo diễn</th>
+                                    <th>Ngày sinh</th>
+                                    <th>Chiều Cao</th>
+                                    <th>Quốc tịch</th>
+                                    <th>Sửa</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listDaoDien"> 
+                                <tr class="dongphim" ng-repeat="x in listDaoDien">    
+                                    <td class="op">{{x.maDaoDien}}</td>
+                                    <td class="op">{{x.tenDaoDien}}</td>
+                                    <td class="op">{{x.ngaySinh}}</td>
+                                    <td class="op">{{x.chieuCao}}</td>
+                                    <td class="op">{{x.quocTich}}</td>
+                                    <td class="op">
+                                        <button class="btnSua" onclick="document.getElementById('themdaodien').style.display='block'" ng-click="thongtinDaoDien(x.maDaoDien)"><i class="fa-regular fa-pen-to-square"></button></i>
+                                    </td>
+                                    <td class="op">
+                                        <button class="btnXoa"><i class="fa-solid fa-trash" ng-click="deleteDaoDien(x.maDaoDien)"></i></button>
+                                    </td>          
+                                </tr>     
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="summary">
+                        <div class="box-left">Số lượng đạo diễn: <span id="soluong">0</span></div>
+                        <div class="box-right">
+                            <button><i class="fas fa-angle-left"></i></button>
+                            <button>1</button>
+                            <button>2</button>
+                            <button>3</button>
+                            <button>4</button>
+                            <button><i class="fas fa-angle-right"></i></button>
+                        </div>
+                    </div>                   
+                </div>
+                <div id="themdaodien" class="themphim">
+                    <form class="themphim-content animate">
+                        <div class="imgcontainer">
+                            <h3>CẬP NHẬT ĐẠO DIỄN</h3>
+                            <span onclick="document.getElementById('themdaodien').style.display='none'" class="close" title="Close">&times;</span>
+                        </div>
+                        <div class="themphim-form">
+                            <label for="tpmap"><b>Mã đạo diễn:</b></label>
+                            <input type="text" id="tpmap" name="tpmap" ng-model="MaDaoDien">
+                            <label for="tptp"><b>Tên đạo diễn:</b></label>
+                            <input type="text" id="tptp" name="tptp" ng-model="TenDaoDien">
+                            <label for="tptl"><b>Ngày sinh:</b></label>
+                            <input type="text" id="tptl" name="tptl" ng-model="NgaySinh">
+                            <label for="tpnrm"><b>Chiều cao:</b></label>
+                            <input type="text" id="tpnrm" name="tpnrm" ng-model="ChieuCao">
+                            <label for="tpqgsx"><b>Quốc tịch:</b></label>
+                            <input type="text" id="tpqgsx" name="tpqgsx" ng-model="QuocTich">
+                            <button class="btn-themphim" type="submit" onclick="document.getElementById('themdaodien').style.display='none'" ng-click="updateDaoDien()">SỬA ĐẠO DIỄN</button>
+                            <button class="btn-themphim" type="submit" onclick="document.getElementById('themdaodien').style.display='none'" ng-click="createDaoDien()">THÊM ĐẠO DIỄN</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- QL Diễn Viên -->
+            <div id="QLDIENVIEN" class="tabcontent" ng-controller="DienVienCtrl">
+                <div class="qlphim">
+                    <h2>QUẢN LÝ DIỄN VIÊN</h2>
+                    <div class="tool">
+                        <button class="btn-add" onclick="document.getElementById('themdienvien').style.display='block'" ng-click="moForm()">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><style>svg{fill:#ffffff}</style><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                            Thêm diễn viên
+                        </button>
+                        <label for="qlphimtenphim">Tên diễn viên:</label>
+                        <input class="search-inp" type="search" id="qlphimtenphim" name="qlphimtenphim" placeholder="Nhập tên diễn viên..." ng-model="timdienvien">
+                        <button class="btn-search" ng-click="loadDienVien()">Tìm kiếm</button>                   
+                    </div>
+                    <div class="table-data">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Mã diễn viên</th>
+                                    <th>Tên diễn viên</th>
+                                    <th>Ngày sinh</th>
+                                    <th>Chiều cao</th>
+                                    <th>Quốc tịch</th>
+                                    <th>Sửa</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listDienVien"> 
+                                <tr class="dongphim" ng-repeat="x in listDienVien">    
+                                    <td class="op">{{x.maDienVien}}</td>
+                                    <td class="op">{{x.tenDienVien}}</td>
+                                    <td class="op">{{x.ngaySinh}}</td>
+                                    <td class="op">{{x.chieuCao}}</td>
+                                    <td class="op">{{x.quocTich}}</td>
+                                    <td class="op">
+                                        <button class="btnSua" onclick="document.getElementById('themdienvien').style.display='block'" ng-click="thongtinDienVien(x.maDienVien)"><i class="fa-regular fa-pen-to-square"></button></i>
+                                    </td>
+                                    <td class="op">
+                                        <button class="btnXoa"><i class="fa-solid fa-trash" ng-click="deleteDienVien(x.maDienVien)"></i></button>
+                                    </td>          
+                                </tr>     
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="summary">
+                        <div class="box-left">Số lượng diễn viên: <span id="soluong">0</span></div>
+                        <div class="box-right">
+                            <button><i class="fas fa-angle-left"></i></button>
+                            <button>1</button>
+                            <button>2</button>
+                            <button>3</button>
+                            <button>4</button>
+                            <button><i class="fas fa-angle-right"></i></button>
+                        </div>
+                    </div>                   
+                </div>
+                <div id="themdienvien" class="themphim">
+                    <form class="themphim-content animate">
+                        <div class="imgcontainer">
+                            <h3>CẬP NHẬT PHIM</h3>
+                            <span onclick="document.getElementById('themdienvien').style.display='none'" class="close" title="Close">&times;</span>
+                        </div>
+                        <div class="themphim-form">
+                            <label for="tpmap"><b>Mã diễn viên:</b></label>
+                            <input type="text" id="tpmap" name="tpmap" ng-model="MaDienVien">
+                            <label for="tptp"><b>Tên diễn viên:</b></label>
+                            <input type="text" id="tptp" name="tptp" ng-model="TenDienVien">
+                            <label for="tptl"><b>Ngày sinh:</b></label>
+                            <input type="text" id="tptl" name="tptl" ng-model="NgaySinh">
+                            <label for="tpnrm"><b>Chiều cao:</b></label>
+                            <input type="text" id="tpnrm" name="tpnrm" ng-model="ChieuCao">
+                            <label for="tpqgsx"><b>Quốc tịch:</b></label>
+                            <input type="text" id="tpqgsx" name="tpqgsx" ng-model="QuocTich">
+                            <button class="btn-themphim" type="submit" onclick="document.getElementById('themdienvien').style.display='none'" ng-click="updateDienVien()">SỬA DIỄN VIÊN</button>
+                            <button class="btn-themphim" type="submit" onclick="document.getElementById('themdienvien').style.display='none'" ng-click="createDienVien()">THÊM DIỄN VIÊN</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- THỐNG KÊ -->
+            <div id="THONGKE" class="tabcontent">
+                <div class="qlphim">
+                    <h2>BÁO CÁO DOANH THU</h2>
+                    <div class="tool">  
+                        <label for="qlscptkphongchieu">Loại thời gian:</label>
+                        <select class="search-inp" name="qlscptkphongchieu" id="qlscptkphongchieu">
+                            <option value="choose">---Chọn loại thời gian---</option>
+                            <option value="Báo cáo theo ngày">Báo cáo theo ngày</option>
+                            <option value="Báo cáo theo tháng">Báo cáo theo tháng</option>
+                            <option value="Báo cáo theo năm">Báo cáo theo năm</option>
+                        </select>
+                        <label for="qlscptkphongchieu">Ngày bắt đầu:</label>
+                        <input class="search-inp" type="date" id="startday" name="startday">    
+                        <label for="qlscptkphongchieu">Ngày kết thúc:</label>
+                        <input class="search-inp" type="date" id="endday" name="endday">  
+                        <button class="btn-search">Thống kê</button>             
+                    </div>               
+                </div>
+                <div style="margin-top: 30px; display: flex;">
+                    <canvas id="ChartDoanhThu" style="width:100%;max-width:600px;height: 400px;"></canvas>
+                    <canvas id="ChartPhimBanChay" style="width:100%;max-width:550px;height: 400px;"></canvas>
+                </div> 
+            </div>
+        </div>       
+        <br>
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-container">
+                <div class="footer-top">
+                    <div style="width: 25%;">
+                        <h3 class="footer-title">GIỚI THIỆU</h3>
+                        <ul>
+                            <li><a>Về Chúng Tôi</a></li>
+                            <li><a>Thỏa Thuận Sử Dụng</a></li>
+                            <li><a>Quy Chế Hoạt Động</a></li>
+                            <li><a>Chính Sách Bảo Mật</a></li>
+                        </ul>
+                    </div>
+                    <div style="width: 25%;">
+                        <h3 class="footer-title">GÓC ĐIỆN ẢNH</h3>
+                        <ul>
+                            <li><a>Thể Loại Phim</a></li>
+                            <!-- <li><a>Bình Luận Phim</a></li>
+                            <li><a>Blog Điện Ảnh</a></li> -->
+                            <li><a>Phim Hay Tháng</a></li>
+                        </ul>
+                    </div>
+                    <div style="width: 25%;">
+                        <h3 class="footer-title">HỖ TRỢ</h3>
+                        <ul>
+                            <li><a>Góp Ý</a></li>
+                            <li><a>Sale & Services</a></li>
+                            <li><a>Rạp / Giá Vé</a></li>
+                            <li><a>Tuyển Dụng</a></li>
+                            <li><a>FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div style="width: 25%;">
+                        <div class="footer-logo">
+                            <img src="Images/footer/galaxycine_logo.svg">
+                        </div>
+                        <ul style="display: flex;">
+                            <li class="footer-connect"><a><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-facebook" class="svg-inline--fa fa-square-facebook fa-2x " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z"></path></svg></a></li>
+                            <li class="footer-connect"><a><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="youtube" class="svg-inline--fa fa-youtube fa-2x " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg></a></li>
+                            <li class="footer-connect"><a><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-instagram" class="svg-inline--fa fa-square-instagram fa-2x " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224,202.66A53.34,53.34,0,1,0,277.36,256,53.38,53.38,0,0,0,224,202.66Zm124.71-41a54,54,0,0,0-30.41-30.41c-21-8.29-71-6.43-94.3-6.43s-73.25-1.93-94.31,6.43a54,54,0,0,0-30.41,30.41c-8.28,21-6.43,71.05-6.43,94.33S91,329.26,99.32,350.33a54,54,0,0,0,30.41,30.41c21,8.29,71,6.43,94.31,6.43s73.24,1.93,94.3-6.43a54,54,0,0,0,30.41-30.41c8.35-21,6.43-71.05,6.43-94.33S357.1,182.74,348.75,161.67ZM224,338a82,82,0,1,1,82-82A81.9,81.9,0,0,1,224,338Zm85.38-148.3a19.14,19.14,0,1,1,19.13-19.14A19.1,19.1,0,0,1,309.42,189.74ZM400,32H48A48,48,0,0,0,0,80V432a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V80A48,48,0,0,0,400,32ZM382.88,322c-1.29,25.63-7.14,48.34-25.85,67s-41.4,24.63-67,25.85c-26.41,1.49-105.59,1.49-132,0-25.63-1.29-48.26-7.15-67-25.85s-24.63-41.42-25.85-67c-1.49-26.42-1.49-105.61,0-132,1.29-25.63,7.07-48.34,25.85-67s41.47-24.56,67-25.78c26.41-1.49,105.59-1.49,132,0,25.63,1.29,48.33,7.15,67,25.85s24.63,41.42,25.85,67.05C384.37,216.44,384.37,295.56,382.88,322Z"></path></svg></a></li>
+                        </ul>
+                        <div class="footer-logo">
+                            <a href="http://online.gov.vn/Home/WebDetails/5005?AspxAutoDetectCookieSupport=1"><img style="width: 168px;" src="Images/footer/logoSaleNoti.png"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="footer-logo">
+                        <img src="Images/footer/galaxycine_logo.svg">
+                    </div>
+                    <div class="footer-inf">
+                        <h3>CÔNG TY CỔ PHẦN PHIM THIÊN NGÂN</h3>
+                        <p>Toà nhà Bitexco Nam Long, 63A Võ Văn Tần, Phường 6, Quận 3, Tp. Hồ Chí Minh, Việt Nam</p>
+                        <p>028.39.333.303 - 19002224 (9:00 - 22:00) - hotro@galaxystudio.vn</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            //Biểu đồ doanh thu
+            const xValues = ["13/12","14/12","15/12","16/12","17/12","18/12","19/12","20/12"];
+            const yValues = [25,60,34,43,55,40,47,72];
+
+            new Chart("ChartDoanhThu", {
+                type: "line",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        fill: false,
+                        lineTension: 0,
+                        backgroundColor: "rgba(0,0,255,1.0)",
+                        borderColor: "rgba(0,0,255,0.1)",
+                        data: yValues
+                    }]
+                },
+                options: {
+                    legend: {display: false},
+                    scales: {
+                        yAxes: [{ticks: {min: 0, max:100}}],
+                    },
+                    title: {
+                        display: true,
+                        text: "BÁO CÁO DOANH THU"
+                    }
+                }
+            });
+            //Biểu đồ phim bán chạy
+            const xValues2 = ["Đất Rừng Phương Nam", "COBWEB", "WONKA", "Giao Lộ 8675", "Gia Đình Quái Vật"];
+            const yValues2 = [55, 49, 44, 24, 15];
+            const barColors = [
+                "#b91d47",
+                "#00aba9",
+                "#2b5797",
+                "#e8c3b9",
+                "#1e7145"
+            ];
+
+            new Chart("ChartPhimBanChay", {
+                type: "pie",
+                data: {
+                    labels: xValues2,
+                    datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues2
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "PHIM VÉ BÁN CHẠY"
+                    }
+                }
+            });
+            //Tab quản lý
+            openTab(event, 'QLSUATCHIEU');
+            function openTab(evt, tabName) {
+                var i, tabcontent, tablinks;
+
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+
+                tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(tabName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+        </script>
+    </body>
+</html>
